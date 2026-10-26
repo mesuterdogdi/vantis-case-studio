@@ -24,14 +24,23 @@ const pillars = [
 ];
 
 function Index() {
-  const titan = products[0];
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Header />
-      <section className="relative mx-auto max-w-6xl px-6 pb-20 pt-16 md:pt-24">
-        <div className="glow-blob animate-glow pointer-events-none absolute -right-20 top-10 h-[28rem] w-[28rem]" />
-        <div className="relative grid items-center gap-12 md:grid-cols-[1.1fr_1fr]">
-          <div className="animate-rise">
+      <section className="relative isolate flex min-h-[86vh] items-center overflow-hidden">
+        <img
+          src={heroBg}
+          alt=""
+          aria-hidden="true"
+          width={1920}
+          height={1088}
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-right"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/85 to-background/10" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-transparent to-background/70" />
+        <div className="glow-blob animate-glow pointer-events-none absolute -left-24 top-1/3 h-[26rem] w-[26rem]" />
+        <div className="relative mx-auto w-full max-w-6xl px-6 py-24">
+          <div className="animate-rise max-w-xl">
             <span className="label inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-[0.65rem] text-primary">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" /> Now for iPhone 18 Pro Max
             </span>
@@ -45,9 +54,6 @@ function Index() {
               <Link to="/shop" className="btn-neon">Shop cases <ArrowRight className="h-4 w-4" /></Link>
               <Link to="/about" className="btn-ghost-neon">Our story</Link>
             </div>
-          </div>
-          <div className="animate-floaty relative">
-            <img src={titan.image} alt="Vantis Titan case on dark rocks" className="w-full rounded-[2.5rem] shadow-[var(--shadow-glow)]" />
           </div>
         </div>
       </section>
