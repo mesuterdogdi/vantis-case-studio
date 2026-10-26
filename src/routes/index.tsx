@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shield, Magnet, Layers, ArrowRight } from "lucide-react";
 import { Header, Footer, ProductCard, Marquee, products, mark } from "@/components/site";
+import heroBg from "@/assets/hero-bg.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
