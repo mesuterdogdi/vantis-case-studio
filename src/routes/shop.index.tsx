@@ -72,7 +72,7 @@ function Shop() {
                   <p className="label text-[0.65rem] text-primary">{p.slug === "titan" ? "Maximum protection" : "Slim everyday protection"}</p>
                   <div className="flex gap-2" aria-label="Available colors">{colors.map((c) => <span key={c.name} title={c.name} className={`h-4 w-4 rounded-full ring-1 ring-border ${c.swatch}`} />)}</div>
                 </div>
-                <div className="mt-3 flex items-center justify-between gap-4"><h2 className="text-4xl text-foreground">Vantis {p.name}</h2><p className="text-xl font-semibold">${p.price}</p></div>
+                <div className="mt-3 flex items-center justify-between gap-4"><h2 className="text-4xl text-foreground">Vantis {p.name}</h2><p className="text-xl font-semibold">{formatPrice(p.price)}</p></div>
                 <p className="mt-3 text-sm text-muted-foreground">{p.tagline}</p>
                 <p className="mt-4 border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground">{model === "All models" ? "iPhone 18 & 17 · Pro / Pro Max" : model} <span className="mx-2">/</span> {color === "All colors" ? "Black or Blue" : color}</p>
                 <Button asChild className="mt-6 h-11 rounded-full px-6"><Link to="/shop/$slug" params={{ slug: p.slug }}>Choose your case <ArrowRight /></Link></Button>

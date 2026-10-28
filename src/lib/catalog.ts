@@ -4,6 +4,10 @@ export const colors = [
   { name: "Blue", swatch: "bg-case-blue" },
 ] as const;
 
+export function formatPrice(amount: number): string {
+  return `$${amount.toFixed(2)}`;
+}
+
 export function nextBannerModel(current: string, random = Math.random): string {
   const alternatives = models.filter((model) => model !== current);
   return alternatives[Math.min(alternatives.length - 1, Math.max(0, Math.floor(random() * alternatives.length)))] ?? models[0];
