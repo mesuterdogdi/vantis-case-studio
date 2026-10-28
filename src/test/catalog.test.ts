@@ -9,6 +9,11 @@ describe("Vantis product options", () => {
   it("offers Black and Blue", () => {
     expect(colors.map((color) => color.name)).toEqual(["Black", "Blue"]);
   });
+  it("lists the prices the user set", () => {
+    expect(products.find((p) => p.slug === "titan")?.price).toBe(24.99);
+    expect(products.find((p) => p.slug === "ghost")?.price).toBe(16.99);
+    expect(formatPrice(24.99 * 3)).toBe("$74.97");
+  });
   it("randomly selects another supported model each banner loop", () => {
     expect(nextBannerModel("iPhone 18 Pro Max", () => 0)).toBe("iPhone 18 Pro");
     expect(nextBannerModel("iPhone 18 Pro Max", () => 0.5)).toBe("iPhone 17 Pro Max");
