@@ -29,6 +29,8 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
   --color-background: var(--background);
+  --color-case-black: var(--case-black);
+  --color-case-blue: var(--case-blue);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -64,6 +66,8 @@
 }
 
 :root {
+  --case-black: oklch(0.16 0 0);
+  --case-blue: oklch(0.55 0.15 250);
   --radius: 1.25rem;
   --background: oklch(0.14 0 0);
   --foreground: oklch(0.96 0 0);
@@ -146,3 +150,7 @@
 @utility glow-blob { background: radial-gradient(circle, color-mix(in oklab, var(--primary) 45%, transparent), transparent 65%); filter: blur(40px); border-radius: 999px; }
 @utility glass { background: color-mix(in oklab, var(--card) 70%, transparent); backdrop-filter: blur(16px); border: 1px solid color-mix(in oklab, var(--foreground) 8%, transparent); }
 @utility text-outline { color: transparent; -webkit-text-stroke: 1px color-mix(in oklab, var(--foreground) 35%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee, .animate-floaty, .animate-glow, .animate-rise { animation: none; }
+}

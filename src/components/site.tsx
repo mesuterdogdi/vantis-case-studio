@@ -5,9 +5,8 @@ import logo from "@/assets/vantislogotype.png.asset.json";
 import mark from "@/assets/vantisV.png.asset.json";
 import titan from "@/assets/VANTISTITANLOGOPRODUCTREAL.png.asset.json";
 import ghost from "@/assets/VANTISGHOSTPRODUCTLOGO.png.asset.json";
-
-export const models = ["iPhone 18 Pro Max"] as const;
-export const colors = [{ name: "Black", swatch: "bg-background" }] as const;
+import { models, nextBannerModel } from "@/lib/catalog";
+export { models, colors } from "@/lib/catalog";
 
 export const products = [
   {
@@ -50,11 +49,13 @@ const nav = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
-export function Marquee({ items }: { items: string[] }) {
-  const row = [...items, ...items, ...items, ...items];
+export function Marquee({ items, rotateModels = false }: { items: string[]; rotateModels?: boolean }) {
+  const [featuredModel, setFeaturedModel] = useState<string>(models[0]);
+  const content = rotateModels ? ["Free shipping", featuredModel, ...items] : items;
+  const row = [...content, ...content, ...content, ...content];
   return (
     <div className="overflow-hidden bg-primary py-3 text-primary-foreground">
-      <div className="animate-marquee flex w-max gap-10 whitespace-nowrap">
+      <div className="animate-marquee flex w-max gap-10 whitespace-nowrap" onAnimationIteration={() => { if (rotateModels) setFeaturedModel((current) => nextBannerModel(current)); }}>
         {[...row, ...row].map((t, i) => (
           <span key={i} className="label flex items-center gap-10 text-xs">
             {t}
