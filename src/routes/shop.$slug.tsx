@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Check, Minus, Plus, Truck, ShieldCheck, RotateCcw } from "lucide-react";
 import { Header, Footer, ProductCard, products, models, colors } from "@/components/site";
 import { Button } from "@/components/ui/button";
+import { formatPrice } from "@/lib/catalog";
 
 export const Route = createFileRoute("/shop/$slug")({
   loader: ({ params }) => {

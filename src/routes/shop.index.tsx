@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowRight, Truck, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header, Footer, Marquee, products, models, colors } from "@/components/site";
+import { formatPrice } from "@/lib/catalog";
 
 export const Route = createFileRoute("/shop/")({
   head: () => ({

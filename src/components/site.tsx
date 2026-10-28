@@ -5,7 +5,7 @@ import logo from "@/assets/vantislogotype.png.asset.json";
 import mark from "@/assets/vantisV.png.asset.json";
 import titan from "@/assets/VANTISTITANLOGOPRODUCTREAL.png.asset.json";
 import ghost from "@/assets/VANTISGHOSTPRODUCTLOGO.png.asset.json";
-import { models, nextBannerModel } from "@/lib/catalog";
+import { models, nextBannerModel, formatPrice } from "@/lib/catalog";
 export { models, colors } from "@/lib/catalog";
 
 export const products = [
@@ -152,7 +152,7 @@ export function ProductCard({ p }: { p: Product }) {
           <h3 className="text-2xl text-foreground">Vantis {p.name}</h3>
           <p className="mt-1 text-xs text-muted-foreground">{p.tagline}</p>
         </div>
-        <span className="label rounded-full bg-primary px-4 py-2 text-xs text-primary-foreground">${p.price}</span>
+        <span className="label rounded-full bg-primary px-4 py-2 text-xs text-primary-foreground">{formatPrice(p.price)}</span>
       </div>
     </Link>
   );
