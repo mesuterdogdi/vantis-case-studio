@@ -36,3 +36,16 @@ describe("Vantis prices and shipping", () => {
     expect(freeShippingNote(50.97)).toBe("Free shipping included.");
   });
 });
+import { stockFor, isLowStock } from "@/lib/catalog";
+describe("Vantis stock", () => {
+  it("has 12 Black 18 Pro Max Titan, 9 Black 18 Pro Max Ghost, 10 otherwise", () => {
+    expect(stockFor("titan", "iPhone 18 Pro Max", "Black")).toBe(12);
+    expect(stockFor("ghost", "iPhone 18 Pro Max", "Black")).toBe(9);
+    expect(stockFor("titan", "iPhone 18 Pro Max", "Blue")).toBe(10);
+    expect(stockFor("ghost", "iPhone 17 Pro", "Black")).toBe(10);
+  });
+  it("flags low stock at 10 or fewer", () => {
+    expect(isLowStock(12)).toBe(false);
+    expect(isLowStock(10)).toBe(true);
+  });
+});
