@@ -1,8 +1,21 @@
 export const models = ["iPhone 18 Pro Max", "iPhone 18 Pro", "iPhone 17 Pro Max", "iPhone 17 Pro"] as const;
+
 export const colors = [
   { name: "Black", swatch: "bg-case-black" },
   { name: "Blue", swatch: "bg-case-blue" },
 ] as const;
+
+export const FREE_SHIPPING_THRESHOLD = 30;
+
+export function formatPrice(value: number): string {
+  return `$${value.toFixed(2)}`;
+}
+
+export function freeShippingNote(total: number): string {
+  return total >= FREE_SHIPPING_THRESHOLD
+    ? "Free shipping included."
+    : `Add ${formatPrice(FREE_SHIPPING_THRESHOLD - total)} more for free shipping.`;
+}
 
 export function nextBannerModel(current: string, random = Math.random): string {
   const alternatives = models.filter((model) => model !== current);
