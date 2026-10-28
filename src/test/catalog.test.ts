@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { models, colors, nextBannerModel } from "@/lib/catalog";
+import { models, colors, nextBannerModel, formatPrice } from "@/lib/catalog";
+import { products } from "@/components/site";
 
 describe("Vantis product options", () => {
   it("offers all four requested phone models", () => {
