@@ -58,7 +58,7 @@ function Index() {
         </div>
       </section>
 
-      <Marquee items={["Military grade protection", "MagSafe compatible", "Drop-tested 15ft", "Free shipping", "Built better"]} />
+      <Marquee items={["Military grade protection", "MagSafe compatible", "Drop-tested 15ft", "Free shipping over $30", "Built better"]} />
 
       <section className="mx-auto grid max-w-6xl gap-6 px-6 py-24 md:grid-cols-3">
         {pillars.map(({ icon: Icon, title, text }, i) => (

@@ -2,15 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, Truck, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Header, Footer, Marquee, products, models, colors } from "@/components/site";
+import { Header, Footer, Marquee, products, models, colors, formatPrice } from "@/components/site";
 
 export const Route = createFileRoute("/shop/")({
   head: () => ({
     meta: [
       { title: "Shop Cases — Vantis" },
-      { name: "description", content: "Shop Vantis Titan and Ghost cases for iPhone 18 Pro and Pro Max, and iPhone 17 Pro and Pro Max, in Black or Blue. Free shipping." },
+      { name: "description", content: "Shop Vantis Titan and Ghost cases for iPhone 18 Pro and Pro Max, and iPhone 17 Pro and Pro Max, in Black or Blue. Titan $24.99, Ghost $16.99. Free shipping on orders over $30." },
       { property: "og:title", content: "Shop Cases — Vantis" },
-      { property: "og:description", content: "Explore Titan and Ghost for iPhone 18 and 17 Pro models in Black or Blue. Free shipping." },
+      { property: "og:description", content: "Explore Titan ($24.99) and Ghost ($16.99) for iPhone 18 and 17 Pro models in Black or Blue. Free shipping on orders over $30." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -33,7 +33,7 @@ function Shop() {
           <h1 className="mt-4 text-5xl text-foreground md:text-7xl">Vantis <span className="text-primary">cases.</span></h1>
           <p className="mt-5 max-w-lg text-muted-foreground">Two ways to protect your phone. Find your fit.</p>
         </div>
-        <p className="flex shrink-0 items-center gap-2 text-sm text-muted-foreground"><Truck className="h-5 w-5 text-primary" /> Free shipping on every case</p>
+        <p className="flex shrink-0 items-center gap-2 text-sm text-muted-foreground"><Truck className="h-5 w-5 text-primary" /> Free shipping on orders over $30</p>
       </section>
       <Marquee rotateModels items={["Built better", "MagSafe compatible"]} />
       <section className="mx-auto max-w-6xl px-6 pt-10">
@@ -72,7 +72,7 @@ function Shop() {
                   <p className="label text-[0.65rem] text-primary">{p.slug === "titan" ? "Maximum protection" : "Slim everyday protection"}</p>
                   <div className="flex gap-2" aria-label="Available colors">{colors.map((c) => <span key={c.name} title={c.name} className={`h-4 w-4 rounded-full ring-1 ring-border ${c.swatch}`} />)}</div>
                 </div>
-                <div className="mt-3 flex items-center justify-between gap-4"><h2 className="text-4xl text-foreground">Vantis {p.name}</h2><p className="text-xl font-semibold">${p.price}</p></div>
+                <div className="mt-3 flex items-center justify-between gap-4"><h2 className="text-4xl text-foreground">Vantis {p.name}</h2><p className="text-xl font-semibold">{formatPrice(p.price)}</p></div>
                 <p className="mt-3 text-sm text-muted-foreground">{p.tagline}</p>
                 <p className="mt-4 border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground">{model === "All models" ? "iPhone 18 & 17 · Pro / Pro Max" : model} <span className="mx-2">/</span> {color === "All colors" ? "Black or Blue" : color}</p>
                 <Button asChild className="mt-6 h-11 rounded-full px-6"><Link to="/shop/$slug" params={{ slug: p.slug }}>Choose your case <ArrowRight /></Link></Button>
@@ -80,7 +80,7 @@ function Shop() {
             </article>
           ))}
         </div>
-        <p className="mt-8 text-xs text-muted-foreground">Product photos show Black. Blue photos coming soon.</p>
+        <p className="mt-8 text-xs text-muted-foreground">Product photos show Black. Blue photos coming soon. Free shipping on orders over $30.</p>
       </section>
       <Footer />
     </div>

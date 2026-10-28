@@ -5,14 +5,14 @@ import logo from "@/assets/vantislogotype.png.asset.json";
 import mark from "@/assets/vantisV.png.asset.json";
 import titan from "@/assets/VANTISTITANLOGOPRODUCTREAL.png.asset.json";
 import ghost from "@/assets/VANTISGHOSTPRODUCTLOGO.png.asset.json";
-import { models, nextBannerModel } from "@/lib/catalog";
-export { models, colors } from "@/lib/catalog";
+import { formatPrice, models, nextBannerModel } from "@/lib/catalog";
+export { colors, formatPrice, FREE_SHIPPING_THRESHOLD, freeShippingNote, models } from "@/lib/catalog";
 
 export const products = [
   {
     slug: "titan",
     name: "Titan",
-    price: 49,
+    price: 24.99,
     image: titan.url,
     tagline: "Rugged armor for the toughest days.",
     description:
@@ -26,7 +26,7 @@ export const products = [
   {
     slug: "ghost",
     name: "Ghost",
-    price: 39,
+    price: 16.99,
     image: ghost.url,
     tagline: "Slim hybrid. Serious protection.",
     description:
@@ -51,7 +51,7 @@ const nav = [
 
 export function Marquee({ items, rotateModels = false }: { items: string[]; rotateModels?: boolean }) {
   const [featuredModel, setFeaturedModel] = useState<string>(models[0]);
-  const content = rotateModels ? ["Free shipping", featuredModel, ...items] : items;
+  const content = rotateModels ? ["Free shipping over $30", featuredModel, ...items] : items;
   const row = [...content, ...content, ...content, ...content];
   return (
     <div className="overflow-hidden bg-primary py-3 text-primary-foreground">
@@ -152,7 +152,7 @@ export function ProductCard({ p }: { p: Product }) {
           <h3 className="text-2xl text-foreground">Vantis {p.name}</h3>
           <p className="mt-1 text-xs text-muted-foreground">{p.tagline}</p>
         </div>
-        <span className="label rounded-full bg-primary px-4 py-2 text-xs text-primary-foreground">${p.price}</span>
+        <span className="label rounded-full bg-primary px-4 py-2 text-xs text-primary-foreground">{formatPrice(p.price)}</span>
       </div>
     </Link>
   );
