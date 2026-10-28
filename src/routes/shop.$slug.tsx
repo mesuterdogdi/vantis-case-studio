@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Check, Minus, Plus, Truck, ShieldCheck, RotateCcw } from "lucide-react";
 import { Header, Footer, ProductCard, products, models, colors, formatPrice, freeShippingNote } from "@/components/site";
 import { Button } from "@/components/ui/button";
+import { stockFor, isLowStock } from "@/lib/catalog";
 
 export const Route = createFileRoute("/shop/$slug")({
   loader: ({ params }) => {
@@ -45,6 +46,9 @@ function ProductPage() {
   const [added, setAdded] = useState(false);
   const others = products.filter((x) => x.slug !== slug);
   if (!p) return null;
+  const stock = stockFor(p.slug, model, color);
+  const low = isLowStock(stock);
+  const q = Math.min(qty, stock);
 
   return (
     <div className="min-h-screen overflow-x-hidden">
@@ -59,8 +63,8 @@ function ProductPage() {
           <Link to="/shop" className="label text-[0.65rem] text-muted-foreground hover:text-primary">← All cases</Link>
           <h1 className="mt-4 text-6xl text-foreground md:text-7xl">Vantis <span className="text-primary">{p.name}</span></h1>
           <p className="mt-4 text-lg text-muted-foreground">{p.tagline}</p>
-          <p className="label mt-6 text-3xl text-foreground">{formatPrice(p.price * qty)}</p>
-          <p className="mt-2 flex items-center gap-2 text-xs text-muted-foreground"><Truck className="h-4 w-4 shrink-0 text-primary" /> {freeShippingNote(p.price * qty)}</p>
+          <p className="label mt-6 text-3xl text-foreground">{formatPrice(p.price * q)}</p>
+          <p className="mt-2 flex items-center gap-2 text-xs text-muted-foreground"><Truck className="h-4 w-4 shrink-0 text-primary" /> {freeShippingNote(p.price * q)}</p>
 
           <div className="mt-10">
             <p className="label text-[0.65rem] text-muted-foreground">Model</p>
@@ -86,14 +90,19 @@ function ProductPage() {
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-4 rounded-full bg-secondary px-4 py-3">
-              <button onClick={() => setQty(Math.max(1, qty - 1))} aria-label="Less"><Minus className="h-4 w-4" /></button>
-              <span className="w-6 text-center">{qty}</span>
-              <button onClick={() => setQty(qty + 1)} aria-label="More"><Plus className="h-4 w-4" /></button>
+              <button onClick={() => setQty(Math.max(1, q - 1))} aria-label="Less"><Minus className="h-4 w-4" /></button>
+              <span className="w-6 text-center">{q}</span>
+              <button onClick={() => setQty(Math.min(stock, q + 1))} disabled={q >= stock} className="disabled:opacity-40" aria-label="More"><Plus className="h-4 w-4" /></button>
             </div>
             <button onClick={() => { setAdded(true); setTimeout(() => setAdded(false), 2000); }} className="btn-neon flex-1 justify-center">
               {added ? <><Check className="h-4 w-4" /> Added</> : "Add to cart"}
             </button>
           </div>
+
+          <p className="mt-4 flex items-center gap-3 text-sm text-muted-foreground">
+            <span>{stock} in stock</span>
+            {low && <span className="label rounded-full bg-primary/15 px-3 py-1 text-[0.6rem] text-primary">Only {stock} left</span>}
+          </p>
 
           <div className="mt-8 grid grid-cols-3 gap-3 text-center text-xs text-muted-foreground">
             {[[Truck, "Fast shipping"], [ShieldCheck, "Lifetime warranty"], [RotateCcw, "30-day returns"]].map(([I, t]) => {
