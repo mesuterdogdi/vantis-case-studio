@@ -12,7 +12,7 @@ export const products = [
   {
     slug: "titan",
     name: "Titan",
-    price: 49,
+    price: 24.99,
     image: titan.url,
     tagline: "Rugged armor for the toughest days.",
     description:
@@ -26,7 +26,7 @@ export const products = [
   {
     slug: "ghost",
     name: "Ghost",
-    price: 39,
+    price: 16.99,
     image: ghost.url,
     tagline: "Slim hybrid. Serious protection.",
     description:
