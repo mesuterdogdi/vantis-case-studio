@@ -7,9 +7,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Vantis — Phone Cases Built Better" },
-      { name: "description", content: "Rugged, MagSafe-ready phone cases for iPhone 18 Pro Max. Meet Vantis Titan and Vantis Ghost." },
+      { name: "description", content: "Rugged, MagSafe-ready phone cases for iPhone 18 and 17 Pro and Pro Max in Black and Blue. Meet Vantis Titan and Vantis Ghost." },
       { property: "og:title", content: "Vantis — Phone Cases Built Better" },
-      { property: "og:description", content: "Rugged, MagSafe-ready phone cases for iPhone 18 Pro Max." },
+      { property: "og:description", content: "Rugged, MagSafe-ready cases for iPhone 18 and 17 Pro and Pro Max in Black and Blue." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

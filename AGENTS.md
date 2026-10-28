@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep supported models, color swatches, and banner model selection in the shared catalog module so shop browsing and both product pages stay consistent.
+- Use the shop marquee's animation iteration event to choose a different random supported model after each full loop; preserve a deterministic initial model for hydration.
+- Keep original product photos accurate: label them as Black and disclose that Blue photos are not available instead of recoloring supplied assets.

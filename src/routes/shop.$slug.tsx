@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, Minus, Plus, Truck, ShieldCheck, RotateCcw } from "lucide-react";
 import { Header, Footer, ProductCard, products, models, colors } from "@/components/site";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/shop/$slug")({
   loader: ({ params }) => {
@@ -10,7 +11,7 @@ export const Route = createFileRoute("/shop/$slug")({
     return { name: product.name, tagline: product.tagline };
   },
   head: ({ loaderData }) => {
-    const title = loaderData ? `Vantis ${loaderData.name} — iPhone 18 Pro Max Case` : "Case not found — Vantis";
+    const title = loaderData ? `Vantis ${loaderData.name} — iPhone 18 & 17 Pro Cases` : "Case not found — Vantis";
     const desc = loaderData?.tagline ?? "Vantis phone cases.";
     return {
       meta: [
@@ -37,12 +38,13 @@ export const Route = createFileRoute("/shop/$slug")({
 
 function ProductPage() {
   const { slug } = Route.useParams();
-  const p = products.find((x) => x.slug === slug)!;
+  const p = products.find((x) => x.slug === slug);
   const [model, setModel] = useState<string>(models[0]);
   const [color, setColor] = useState<string>(colors[0].name);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const others = products.filter((x) => x.slug !== slug);
+  if (!p) return null;
 
   return (
     <div className="min-h-screen overflow-x-hidden">
@@ -50,7 +52,8 @@ function ProductPage() {
       <section className="relative mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-2">
         <div className="glow-blob animate-glow pointer-events-none absolute left-0 top-20 h-96 w-96" />
         <div className="relative md:sticky md:top-28 md:self-start">
-          <img src={p.image} alt={`Vantis ${p.name} in ${color}`} className="animate-rise w-full rounded-[2.5rem]" />
+          <img src={p.image} alt={`Vantis ${p.name} in Black`} className="animate-rise w-full rounded-[2.5rem]" />
+          {color === "Blue" && <p className="mt-4 text-center text-xs text-muted-foreground">Blue selected. Product photo shows Black; Blue photos coming soon.</p>}
         </div>
         <div className="animate-rise relative">
           <Link to="/shop" className="label text-[0.65rem] text-muted-foreground hover:text-primary">← All cases</Link>
@@ -62,11 +65,10 @@ function ProductPage() {
             <p className="label text-[0.65rem] text-muted-foreground">Model</p>
             <div className="mt-3 flex flex-wrap gap-3">
               {models.map((m) => (
-                <button key={m} onClick={() => setModel(m)} className={`rounded-full border px-5 py-3 text-sm transition-colors ${model === m ? "border-primary text-primary" : "border-border text-muted-foreground"}`}>
+                <Button variant="outline" aria-pressed={model === m} key={m} onClick={() => setModel(m)} className={`h-auto rounded-full border px-5 py-3 text-sm transition-colors ${model === m ? "border-primary text-primary" : "border-border text-muted-foreground"}`}>
                   {m}
-                </button>
+                </Button>
               ))}
-              <span className="rounded-full border border-dashed border-border px-5 py-3 text-sm text-muted-foreground">More models soon</span>
             </div>
           </div>
 
@@ -74,9 +76,9 @@ function ProductPage() {
             <p className="label text-[0.65rem] text-muted-foreground">Color — <span className="text-foreground">{color}</span></p>
             <div className="mt-3 flex gap-3">
               {colors.map((c) => (
-                <button key={c.name} onClick={() => setColor(c.name)} aria-label={c.name} className={`h-11 w-11 rounded-full border-2 p-1 ${color === c.name ? "border-primary" : "border-border"}`}>
+                <Button variant="outline" aria-pressed={color === c.name} key={c.name} onClick={() => setColor(c.name)} aria-label={c.name} className={`h-11 w-11 rounded-full border-2 p-1 ${color === c.name ? "border-primary" : "border-border"}`}>
                   <span className={`block h-full w-full rounded-full ${c.swatch} ring-1 ring-border`} />
-                </button>
+                </Button>
               ))}
             </div>
           </div>

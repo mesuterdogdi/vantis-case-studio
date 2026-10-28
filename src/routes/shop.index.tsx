@@ -1,13 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Header, Footer, ProductCard, Marquee, products } from "@/components/site";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { ArrowRight, Truck, SlidersHorizontal } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Header, Footer, Marquee, products, models, colors } from "@/components/site";
 
 export const Route = createFileRoute("/shop/")({
   head: () => ({
     meta: [
       { title: "Shop Cases — Vantis" },
-      { name: "description", content: "Shop Vantis Titan and Vantis Ghost cases for iPhone 18 Pro Max." },
+      { name: "description", content: "Shop Vantis Titan and Ghost cases for iPhone 18 Pro and Pro Max, and iPhone 17 Pro and Pro Max, in Black or Blue. Free shipping." },
       { property: "og:title", content: "Shop Cases — Vantis" },
-      { property: "og:description", content: "Shop Vantis Titan and Vantis Ghost cases for iPhone 18 Pro Max." },
+      { property: "og:description", content: "Explore Titan and Ghost for iPhone 18 and 17 Pro models in Black or Blue. Free shipping." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -16,18 +19,68 @@ export const Route = createFileRoute("/shop/")({
 });
 
 function Shop() {
+  const [model, setModel] = useState("All models");
+  const [color, setColor] = useState("All colors");
+  const [sort, setSort] = useState("featured");
+  const sorted = [...products].sort((a, b) => sort === "low" ? a.price - b.price : sort === "high" ? b.price - a.price : 0);
+  const selectClass = "h-11 max-w-full rounded-full border border-border bg-background px-4 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary";
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Header />
-      <section className="relative mx-auto max-w-6xl px-6 py-20">
-        <div className="glow-blob animate-glow pointer-events-none absolute -left-20 top-0 h-80 w-80" />
-        <p className="label relative text-xs text-primary">Shop</p>
-        <h1 className="relative mt-4 text-6xl text-foreground md:text-8xl">Choose your <span className="text-primary">armor</span></h1>
-        <p className="relative mt-6 text-muted-foreground">Available now for iPhone 18 Pro Max in Black. More models and colors coming soon.</p>
+      <section className="mx-auto flex max-w-6xl flex-col justify-between gap-6 px-6 pb-12 pt-16 md:flex-row md:items-end">
+        <div>
+          <p className="label text-xs text-primary">The case collection</p>
+          <h1 className="mt-4 text-5xl text-foreground md:text-7xl">Vantis <span className="text-primary">cases.</span></h1>
+          <p className="mt-5 max-w-lg text-muted-foreground">Two ways to protect your phone. Find your fit.</p>
+        </div>
+        <p className="flex shrink-0 items-center gap-2 text-sm text-muted-foreground"><Truck className="h-5 w-5 text-primary" /> Free shipping on every case</p>
       </section>
-      <Marquee items={["iPhone 18 Pro Max", "Black", "More colors soon", "Built better"]} />
-      <section className="mx-auto mt-16 grid max-w-6xl gap-8 px-6 md:grid-cols-2">
-        {products.map((p) => <ProductCard key={p.slug} p={p} />)}
+      <Marquee rotateModels items={["Built better", "MagSafe compatible"]} />
+      <section className="mx-auto max-w-6xl px-6 pt-10">
+        <div className="flex flex-wrap items-end justify-between gap-5 border-b border-border pb-6">
+          <div className="flex flex-wrap items-end gap-3">
+            <SlidersHorizontal className="mb-3 hidden h-5 w-5 text-muted-foreground sm:block" />
+            <label className="flex flex-col gap-2 text-xs text-muted-foreground">Phone model
+              <select aria-label="Filter phone model" className={selectClass} value={model} onChange={(e) => setModel(e.target.value)}>
+                <option>All models</option>{models.map((m) => <option key={m}>{m}</option>)}
+              </select>
+            </label>
+            <label className="flex flex-col gap-2 text-xs text-muted-foreground">Color
+              <select aria-label="Filter color" className={selectClass} value={color} onChange={(e) => setColor(e.target.value)}>
+                <option>All colors</option>{colors.map((c) => <option key={c.name}>{c.name}</option>)}
+              </select>
+            </label>
+          </div>
+          <label className="flex flex-col gap-2 text-xs text-muted-foreground">Sort by
+            <select aria-label="Sort cases" className={selectClass} value={sort} onChange={(e) => setSort(e.target.value)}>
+              <option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option>
+            </select>
+          </label>
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-3 py-6 text-sm text-muted-foreground">
+          <p>2 cases{model !== "All models" ? ` for ${model}` : ""}{color !== "All colors" ? ` · ${color}` : ""}</p>
+          {(model !== "All models" || color !== "All colors") && <Button variant="link" onClick={() => { setModel("All models"); setColor("All colors"); }}>Clear filters</Button>}
+        </div>
+        <div className="grid gap-12 md:grid-cols-2 md:gap-10">
+          {sorted.map((p) => (
+            <article key={p.slug} className="group min-w-0">
+              <Link to="/shop/$slug" params={{ slug: p.slug }} aria-label={`Explore Vantis ${p.name}`} className="block overflow-hidden rounded-lg bg-card">
+                <img src={p.image} alt={`Vantis ${p.name} in Black`} className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none" />
+              </Link>
+              <div className="pt-6">
+                <div className="flex items-center justify-between gap-4">
+                  <p className="label text-[0.65rem] text-primary">{p.slug === "titan" ? "Maximum protection" : "Slim everyday protection"}</p>
+                  <div className="flex gap-2" aria-label="Available colors">{colors.map((c) => <span key={c.name} title={c.name} className={`h-4 w-4 rounded-full ring-1 ring-border ${c.swatch}`} />)}</div>
+                </div>
+                <div className="mt-3 flex items-center justify-between gap-4"><h2 className="text-4xl text-foreground">Vantis {p.name}</h2><p className="text-xl font-semibold">${p.price}</p></div>
+                <p className="mt-3 text-sm text-muted-foreground">{p.tagline}</p>
+                <p className="mt-4 border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground">{model === "All models" ? "iPhone 18 & 17 · Pro / Pro Max" : model} <span className="mx-2">/</span> {color === "All colors" ? "Black or Blue" : color}</p>
+                <Button asChild className="mt-6 h-11 rounded-full px-6"><Link to="/shop/$slug" params={{ slug: p.slug }}>Choose your case <ArrowRight /></Link></Button>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p className="mt-8 text-xs text-muted-foreground">Product photos show Black. Blue photos coming soon.</p>
       </section>
       <Footer />
     </div>
