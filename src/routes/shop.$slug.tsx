@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Check, Minus, Plus, Truck, ShieldCheck, RotateCcw } from "lucide-react";
 import { Header, Footer, ProductCard, products, models, colors } from "@/components/site";
 import { Button } from "@/components/ui/button";
-import { formatPrice } from "@/lib/catalog";
 
 export const Route = createFileRoute("/shop/$slug")({
   loader: ({ params }) => {
@@ -60,7 +59,7 @@ function ProductPage() {
           <Link to="/shop" className="label text-[0.65rem] text-muted-foreground hover:text-primary">← All cases</Link>
           <h1 className="mt-4 text-6xl text-foreground md:text-7xl">Vantis <span className="text-primary">{p.name}</span></h1>
           <p className="mt-4 text-lg text-muted-foreground">{p.tagline}</p>
-          <p className="label mt-6 text-3xl text-foreground">{formatPrice(p.price * qty)}</p>
+          <p className="label mt-6 text-3xl text-foreground">${p.price * qty}</p>
 
           <div className="mt-10">
             <p className="label text-[0.65rem] text-muted-foreground">Model</p>
