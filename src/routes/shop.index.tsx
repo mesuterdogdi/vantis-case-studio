@@ -8,9 +8,9 @@ export const Route = createFileRoute("/shop/")({
   head: () => ({
     meta: [
       { title: "Shop Cases — Vantis" },
-      { name: "description", content: "Shop Vantis Titan and Ghost cases for iPhone 18 Pro and Pro Max, and iPhone 17 Pro and Pro Max, in Black or Blue. Titan $24.99, Ghost $16.99. Free shipping on orders over $30." },
+      { name: "description", content: "Shop Vantis Titan and Ghost cases for iPhone 18 Pro and Pro Max, and iPhone 17 Pro and Pro Max, in Black or Blue. Titan $24.99, Ghost $16.99. Free shipping on orders over $50." },
       { property: "og:title", content: "Shop Cases — Vantis" },
-      { property: "og:description", content: "Explore Titan ($24.99) and Ghost ($16.99) for iPhone 18 and 17 Pro models in Black or Blue. Free shipping on orders over $30." },
+      { property: "og:description", content: "Explore Titan ($24.99) and Ghost ($16.99) for iPhone 18 and 17 Pro models in Black or Blue. Free shipping on orders over $50." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -33,7 +33,7 @@ function Shop() {
           <h1 className="mt-4 text-5xl text-foreground md:text-7xl">Vantis <span className="text-primary">cases.</span></h1>
           <p className="mt-5 max-w-lg text-muted-foreground">Two ways to protect your phone. Find your fit.</p>
         </div>
-        <p className="flex shrink-0 items-center gap-2 text-sm text-muted-foreground"><Truck className="h-5 w-5 text-primary" /> Free shipping on orders over $30</p>
+        <p className="flex shrink-0 items-center gap-2 text-sm text-muted-foreground"><Truck className="h-5 w-5 text-primary" /> Free shipping on orders over $50</p>
       </section>
       <Marquee rotateModels items={["Built better", "MagSafe compatible"]} />
       <section className="mx-auto max-w-6xl px-6 pt-10">
@@ -80,7 +80,7 @@ function Shop() {
             </article>
           ))}
         </div>
-        <p className="mt-8 text-xs text-muted-foreground">Product photos show Black. Blue photos coming soon. Free shipping on orders over $30.</p>
+        <p className="mt-8 text-xs text-muted-foreground">Product photos show Black. Blue photos coming soon. Free shipping on orders over $50.</p>
       </section>
       <Footer />
     </div>
