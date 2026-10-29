@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/vantislogotype.png.asset.json";
 import mark from "@/assets/vantisV.png.asset.json";
-import titan from "@/assets/VANTISTITANLOGOPRODUCTREAL.png.asset.json";
-import ghost from "@/assets/VANTISGHOSTPRODUCTLOGO.png.asset.json";
+import titan from "@/assets/titanhero2good.png.asset.json";
+import ghost from "@/assets/ghosthero1.png.asset.json";
 import { formatPrice, models, nextBannerModel } from "@/lib/catalog";
 export { colors, formatPrice, FREE_SHIPPING_THRESHOLD, freeShippingNote, models } from "@/lib/catalog";
 
