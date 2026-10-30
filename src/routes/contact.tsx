@@ -27,7 +27,7 @@ const topics = ["General question", "Choosing a case", "Order & delivery", "Whol
 function Contact() {
   const [sent, setSent] = useState(false);
   const [name, setName] = useState("");
-  const [topic, setTopic] = useState(topics[0]);
+  const [topic, setTopic] = useState("General question");
   const [message, setMessage] = useState("");
   const [model, setModel] = useState<string>("");
   const [color, setColor] = useState<string>("");
@@ -35,7 +35,7 @@ function Contact() {
   function resetForm() {
     setSent(false);
     setName("");
-    setTopic(topics[0]);
+    setTopic("General question");
     setMessage("");
     setModel("");
     setColor("");
