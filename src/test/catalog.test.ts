@@ -3,6 +3,10 @@ import { colors, FREE_SHIPPING_THRESHOLD, formatPrice, freeShippingNote, models,
 import { products } from "@/components/site";
 
 describe("Vantis product options", () => {
+  it("includes a detachable lens guard on Titan only", () => {
+    expect(products.find((product) => product.slug === "titan")?.hasDetachableLensGuard).toBe(true);
+    expect(products.find((product) => product.slug === "ghost")?.hasDetachableLensGuard).toBe(false);
+  });
   it("offers all four requested phone models", () => {
     expect([...models]).toEqual(["iPhone 18 Pro Max", "iPhone 18 Pro", "iPhone 17 Pro Max", "iPhone 17 Pro"]);
   });

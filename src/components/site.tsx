@@ -13,26 +13,28 @@ export const products = [
     slug: "titan",
     name: "Titan",
     price: 24.99,
+    hasDetachableLensGuard: true,
     image: titan.url,
     tagline: "Rugged armor for the toughest days.",
     description:
-      "Titan is our toughest case. A reinforced frame, raised edges and built-in MagSafe magnets keep your phone safe without slowing you down.",
+      "Titan is our toughest case. A reinforced frame, raised edges, a detachable lens guard and built-in MagSafe magnets keep your phone safe without slowing you down.",
     features: [
       ["Military grade protection", "Drop-tested up to 15ft."],
       ["MagSafe compatible", "Stronger hold. Faster charge."],
       ["Raised edges", "Protects what matters most."],
+      ["Detachable lens guard", "Removable protection for your camera lenses."],
     ],
   },
   {
     slug: "ghost",
     name: "Ghost",
     price: 16.99,
+    hasDetachableLensGuard: false,
     image: ghost.url,
     tagline: "Slim hybrid. Serious protection.",
     description:
-      "Ghost is the slim one. A hybrid shell with a detachable lens guard gives everyday protection in a profile that barely adds bulk.",
+      "Ghost is the slim one. A hybrid shell gives everyday protection in a profile that barely adds bulk.",
     features: [
-      ["Detachable lens guard", "Protects what matters most."],
       ["Shockproof", "Built to withstand drops and impacts."],
       ["Hybrid", "Strong style. Stronger protection."],
     ],
