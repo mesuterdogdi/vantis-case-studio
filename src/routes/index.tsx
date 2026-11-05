@@ -39,7 +39,7 @@ function Index() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/85 to-background/10" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-transparent to-background/70" />
         <div className="glow-blob animate-glow pointer-events-none absolute -left-24 top-1/3 h-[26rem] w-[26rem]" />
-        <div className="relative mx-auto w-full max-w-6xl px-6 py-24">
+        <div className="relative mx-auto w-full max-w-[88rem] px-6 lg:px-12 py-24">
           <div className="animate-rise max-w-xl">
             <span className="label inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-[0.65rem] text-primary">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" /> Now for iPhone 18 Pro Max
@@ -60,7 +60,7 @@ function Index() {
 
       <Marquee items={["Military grade protection", "MagSafe compatible", "Drop-tested 15ft", "Free shipping over $50", "Built better"]} />
 
-      <section className="mx-auto grid max-w-6xl gap-6 px-6 py-24 md:grid-cols-3">
+      <section className="mx-auto grid max-w-[88rem] gap-6 px-6 py-24 md:grid-cols-3">
         {pillars.map(({ icon: Icon, title, text }, i) => (
           <div key={title} className="animate-rise rounded-[2rem] bg-card p-8 transition-colors hover:bg-secondary" style={{ animationDelay: `${i * 120}ms` }}>
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary">
@@ -72,7 +72,7 @@ function Index() {
         ))}
       </section>
 
-      <section className="mx-auto max-w-6xl px-6">
+      <section className="mx-auto max-w-[88rem] px-6 lg:px-12">
         <div className="flex items-end justify-between gap-6">
           <h2 className="text-5xl text-foreground md:text-6xl">The <span className="text-primary">lineup</span></h2>
           <Link to="/shop" className="label flex items-center gap-2 text-xs text-primary">View all <ArrowRight className="h-4 w-4" /></Link>
@@ -82,7 +82,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="mx-auto mt-24 max-w-6xl px-6">
+      <section className="mx-auto mt-24 max-w-[88rem] px-6 lg:px-12">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-primary px-8 py-20 text-center text-primary-foreground">
           <img src={mark.url} alt="" className="animate-floaty pointer-events-none absolute -right-10 -top-10 h-64 w-64 opacity-20 brightness-0" />
           <h2 className="relative mx-auto max-w-2xl text-5xl md:text-6xl">Protect what matters most.</h2>
