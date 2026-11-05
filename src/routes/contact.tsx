@@ -76,14 +76,15 @@ function Contact() {
                 const fd = new FormData(e.currentTarget);
                 setSending(true); setError("");
                 try {
-                  const res = await fetch("https://formsubmit.co/ajax/vantis.cases@gmail.com", {
+                  const res = await fetch("https://api.web3forms.com/submit", {
                     method: "POST",
                     headers: { "Content-Type": "application/json", Accept: "application/json" },
                     body: JSON.stringify({
+                      access_key: "b598b515-8d77-43bd-9b98-3e5452f1e645", from_name: "Vantis website",
                       name: name.trim(), email: String(fd.get("email") ?? "").trim(), topic,
                       orderNumber: String(fd.get("orderNumber") ?? ""), model, color, message: message.trim(),
-                      _subject: `Vantis contact: ${topic}`, _replyto: String(fd.get("email") ?? ""), _template: "table", _captcha: "false",
-                      _honey: String(fd.get("_honey") ?? ""),
+                      subject: `Vantis contact: ${topic}`, replyto: String(fd.get("email") ?? ""),
+                      botcheck: String(fd.get("botcheck") ?? ""),
                     }),
                   });
                   const json = await res.json().catch(() => ({}));
@@ -92,7 +93,7 @@ function Contact() {
                 } catch { setError("Sorry, your message couldn't be sent. Please try again in a moment."); }
                 finally { setSending(false); }
               }}>
-                <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+                <input type="text" name="botcheck" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
                 <div className="mb-7"><h2 className="text-3xl">Drop us a line.</h2><p className="mt-3 text-sm text-muted-foreground">Good conversations start with a hello.</p></div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2"><label htmlFor="contact-name" className="text-sm font-medium">Your name <span className="text-primary">*</span></label><input id="contact-name" name="name" required autoComplete="name" maxLength={80} placeholder="Your name" className={field} value={name} onChange={(e) => setName(e.target.value)} /></div>
