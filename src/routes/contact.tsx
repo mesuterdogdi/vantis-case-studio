@@ -26,6 +26,8 @@ const topics = ["General question", "Choosing a case", "Order & delivery", "Whol
 
 function Contact() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [topic, setTopic] = useState("General question");
   const [message, setMessage] = useState("");
@@ -65,12 +67,32 @@ function Contact() {
                 <p className="label text-xs text-primary">A little hello goes a long way</p>
                 <h2 className="mt-5 text-4xl leading-tight sm:text-5xl">Thanks{name.trim() ? `, ${name.trim().split(/\s+/)[0]}` : ""}!</h2>
                 <p className="mt-5 max-w-sm leading-relaxed text-muted-foreground">Thank you for your message and for being part of Vantis. We appreciate you taking the time to reach out.</p>
-                <p className="mt-5 max-w-sm text-xs leading-relaxed text-muted-foreground">This is a preview confirmation. Your message hasn't been delivered — messaging isn't connected yet.</p>
                 <Button asChild className="btn-neon mt-8 h-auto"><Link to="/shop">Explore the cases <ArrowRight /></Link></Button>
                 <Button variant="link" className="mt-3" onClick={resetForm}>Write another message</Button>
               </div>
             ) : (
-              <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+              <form className="space-y-5" onSubmit={async (e) => {
+                e.preventDefault();
+                const fd = new FormData(e.currentTarget);
+                setSending(true); setError("");
+                try {
+                  const res = await fetch("https://formsubmit.co/ajax/vantis.cases@gmail.com", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", Accept: "application/json" },
+                    body: JSON.stringify({
+                      name: name.trim(), email: String(fd.get("email") ?? "").trim(), topic,
+                      orderNumber: String(fd.get("orderNumber") ?? ""), model, color, message: message.trim(),
+                      _subject: `Vantis contact: ${topic}`, _replyto: String(fd.get("email") ?? ""), _template: "table", _captcha: "false",
+                      _honey: String(fd.get("_honey") ?? ""),
+                    }),
+                  });
+                  const json = await res.json().catch(() => ({}));
+                  if (!res.ok || json.success === false || json.success === "false") throw new Error();
+                  setSent(true);
+                } catch { setError("Sorry, your message couldn't be sent. Please try again in a moment."); }
+                finally { setSending(false); }
+              }}>
+                <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
                 <div className="mb-7"><h2 className="text-3xl">Drop us a line.</h2><p className="mt-3 text-sm text-muted-foreground">Good conversations start with a hello.</p></div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2"><label htmlFor="contact-name" className="text-sm font-medium">Your name <span className="text-primary">*</span></label><input id="contact-name" name="name" required autoComplete="name" maxLength={80} placeholder="Your name" className={field} value={name} onChange={(e) => setName(e.target.value)} /></div>
@@ -83,8 +105,8 @@ function Contact() {
                   <div className="space-y-2"><label htmlFor="contact-color" className="text-sm font-medium">Color</label><Select value={color} onValueChange={setColor}><SelectTrigger id="contact-color" className="h-12 rounded-xl bg-background"><SelectValue placeholder="Select a color" /></SelectTrigger><SelectContent>{colors.map((item) => <SelectItem key={item.name} value={item.name}>{item.name}</SelectItem>)}</SelectContent></Select></div>
                 </div>}
                 <div className="space-y-2"><label htmlFor="contact-message" className="text-sm font-medium">Your message <span className="text-primary">*</span></label><textarea id="contact-message" name="message" required rows={5} maxLength={2000} placeholder={topic === "Choosing a case" ? "What matters most to you in a case?" : topic === "Wholesale & partnerships" ? "Tell us a little about your business or idea…" : "Tell us what's on your mind…"} className={`${field} min-h-36 resize-y`} value={message} onChange={(e) => setMessage(e.target.value)} /><p className="text-right text-xs tabular-nums text-muted-foreground">{message.length} / 2,000</p></div>
-                <Button type="submit" className="btn-neon h-auto w-full">Send message <Send /></Button>
-                <p className="text-center text-xs leading-relaxed text-muted-foreground">Preview only — messages aren't delivered yet.</p>
+                {error && <p role="alert" className="text-center text-sm text-destructive">{error}</p>}
+                <Button type="submit" disabled={sending} className="btn-neon h-auto w-full">{sending ? "Sending…" : <>Send message <Send /></>}</Button>
               </form>
             )}
           </div>
