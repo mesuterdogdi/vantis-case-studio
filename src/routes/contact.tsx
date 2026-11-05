@@ -46,7 +46,7 @@ function Contact() {
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Header />
-      <main className="mx-auto max-w-[88rem] px-6 lg:px-12 pb-8 pt-16 md:pt-24">
+      <main className="mx-auto max-w-[96rem] px-6 lg:px-12 pb-8 pt-16 md:pt-24">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>
             <p className="label text-xs text-primary">Vantis / Contact</p>

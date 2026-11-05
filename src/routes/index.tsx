@@ -39,28 +39,33 @@ function Index() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/85 to-background/10" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-transparent to-background/70" />
         <div className="glow-blob animate-glow pointer-events-none absolute -left-24 top-1/3 h-[26rem] w-[26rem]" />
-        <div className="relative mx-auto w-full max-w-[88rem] px-6 lg:px-12 py-24">
-          <div className="animate-rise max-w-xl">
+        <div className="relative mx-auto w-full max-w-[96rem] px-6 lg:px-12 py-24">
+          <div className="animate-rise max-w-2xl">
             <span className="label inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-[0.65rem] text-primary">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" /> Now for iPhone 18 Pro Max
             </span>
-            <h1 className="mt-8 text-6xl text-foreground md:text-8xl">
+            <h1 className="mt-8 text-6xl text-foreground md:text-8xl xl:text-9xl">
               Built<br /><span className="text-primary">better.</span>
             </h1>
-            <p className="mt-6 max-w-md text-lg text-muted-foreground">
+            <p className="mt-6 max-w-lg text-lg md:text-xl text-muted-foreground">
               Armor for the phone you can't live without. Serious protection that still feels like yours.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link to="/shop" className="btn-neon">Shop cases <ArrowRight className="h-4 w-4" /></Link>
               <Link to="/about" className="btn-ghost-neon">Our story</Link>
             </div>
+            <dl className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8">
+              {[["2", "Cases"], ["4", "iPhone models"], ["$50+", "Free shipping"]].map(([v, l]) => (
+                <div key={l}><dt className="label text-[0.65rem] text-muted-foreground">{l}</dt><dd className="mt-2 font-display text-3xl italic text-primary">{v}</dd></div>
+              ))}
+            </dl>
           </div>
         </div>
       </section>
 
       <Marquee items={["Military grade protection", "MagSafe compatible", "Drop-tested 15ft", "Free shipping over $50", "Built better"]} />
 
-      <section className="mx-auto grid max-w-[88rem] gap-6 px-6 py-24 md:grid-cols-3">
+      <section className="mx-auto grid max-w-[96rem] gap-6 px-6 py-24 md:grid-cols-3">
         {pillars.map(({ icon: Icon, title, text }, i) => (
           <div key={title} className="animate-rise rounded-[2rem] bg-card p-8 transition-colors hover:bg-secondary" style={{ animationDelay: `${i * 120}ms` }}>
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary">
@@ -72,7 +77,7 @@ function Index() {
         ))}
       </section>
 
-      <section className="mx-auto max-w-[88rem] px-6 lg:px-12">
+      <section className="mx-auto max-w-[96rem] px-6 lg:px-12">
         <div className="flex items-end justify-between gap-6">
           <h2 className="text-5xl text-foreground md:text-6xl">The <span className="text-primary">lineup</span></h2>
           <Link to="/shop" className="label flex items-center gap-2 text-xs text-primary">View all <ArrowRight className="h-4 w-4" /></Link>
@@ -82,7 +87,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="mx-auto mt-24 max-w-[88rem] px-6 lg:px-12">
+      <section className="mx-auto mt-24 max-w-[96rem] px-6 lg:px-12">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-primary px-8 py-20 text-center text-primary-foreground">
           <img src={mark.url} alt="" className="animate-floaty pointer-events-none absolute -right-10 -top-10 h-64 w-64 opacity-20 brightness-0" />
           <h2 className="relative mx-auto max-w-2xl text-5xl md:text-6xl">Protect what matters most.</h2>

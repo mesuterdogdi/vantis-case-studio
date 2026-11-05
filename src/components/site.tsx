@@ -73,7 +73,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 px-4 pt-4">
-      <div className="glass mx-auto flex max-w-[88rem] items-center justify-between rounded-full px-6 py-3">
+      <div className="glass mx-auto flex max-w-[96rem] items-center justify-between rounded-full px-6 py-3">
         <Link to="/" aria-label="Vantis home">
           <img src={logo.url} alt="Vantis" className="h-5 w-auto" />
         </Link>
@@ -96,7 +96,7 @@ export function Header() {
         </button>
       </div>
       {open && (
-        <nav className="glass mx-auto mt-2 flex max-w-[88rem] flex-col rounded-3xl p-4 md:hidden">
+        <nav className="glass mx-auto mt-2 flex max-w-[96rem] flex-col rounded-3xl p-4 md:hidden">
           {nav.map((n) => (
             <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="label rounded-2xl px-4 py-3 text-xs">
               {n.label}
@@ -111,7 +111,7 @@ export function Header() {
 export function Footer() {
   return (
     <footer className="mt-24 overflow-hidden border-t border-border">
-      <div className="mx-auto grid max-w-[88rem] gap-10 px-6 py-16 md:grid-cols-4">
+      <div className="mx-auto grid max-w-[96rem] gap-10 px-6 py-16 md:grid-cols-4">
         <div className="md:col-span-2">
           <img src={logo.url} alt="Vantis" className="h-7 w-auto" />
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">Phone cases that are built better. Tough, clean, made to last.</p>

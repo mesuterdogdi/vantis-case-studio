@@ -25,7 +25,7 @@ function About() {
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Header />
-      <section className="relative mx-auto max-w-[88rem] px-6 lg:px-12 py-24">
+      <section className="relative mx-auto max-w-[96rem] px-6 lg:px-12 py-24">
         <div className="glow-blob animate-glow pointer-events-none absolute right-0 top-0 h-96 w-96" />
         <img src={mark.url} alt="" className="animate-floaty relative h-16 w-16" />
         <h1 className="relative mt-8 max-w-4xl text-6xl text-foreground md:text-8xl">
@@ -42,7 +42,7 @@ function About() {
         </p>
       </section>
       <Marquee items={["Protection first", "Clean design", "Made to last"]} />
-      <section className="mx-auto grid max-w-[88rem] gap-6 px-6 py-24 md:grid-cols-3">
+      <section className="mx-auto grid max-w-[96rem] gap-6 px-6 py-24 md:grid-cols-3">
         {values.map(([n, t, d]) => (
           <div key={n} className="rounded-[2rem] bg-card p-8">
             <p className="font-display text-5xl font-bold italic text-primary">{n}</p>
@@ -51,7 +51,7 @@ function About() {
           </div>
         ))}
       </section>
-      <section className="mx-auto grid max-w-[88rem] items-center gap-12 px-6 md:grid-cols-2">
+      <section className="mx-auto grid max-w-[96rem] items-center gap-12 px-6 md:grid-cols-2">
         <img src={products[1].image} alt="Vantis Ghost case" className="rounded-[2.5rem]" loading="lazy" />
         <div>
           <h2 className="text-5xl text-foreground">Designed for the <span className="text-primary">everyday.</span></h2>
