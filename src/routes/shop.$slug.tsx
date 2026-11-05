@@ -53,7 +53,7 @@ function ProductPage() {
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Header />
-      <section className="relative mx-auto grid max-w-[88rem] gap-12 px-6 py-16 md:grid-cols-2">
+      <section className="relative mx-auto grid max-w-[96rem] gap-12 px-6 py-16 md:grid-cols-2">
         <div className="glow-blob animate-glow pointer-events-none absolute left-0 top-20 h-96 w-96" />
         <div className="relative md:sticky md:top-28 md:self-start">
           <img src={p.image} alt={`Vantis ${p.name} in Black`} className="animate-rise w-full rounded-[2.5rem]" />
@@ -129,7 +129,7 @@ function ProductPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[88rem] px-6 lg:px-12 pt-16">
+      <section className="mx-auto max-w-[96rem] px-6 lg:px-12 pt-16">
         <h2 className="text-4xl text-foreground">You might also like</h2>
         <div className="mt-8 grid gap-8 md:grid-cols-2">
           {others.map((o) => <ProductCard key={o.slug} p={o} />)}
