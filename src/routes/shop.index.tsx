@@ -21,7 +21,7 @@ function Shop() {
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Header />
-      <section className="mx-auto flex max-w-6xl flex-col justify-between gap-6 px-6 pb-12 pt-16 md:flex-row md:items-end">
+      <section className="mx-auto flex max-w-[88rem] flex-col justify-between gap-6 px-6 pb-12 pt-16 md:flex-row md:items-end">
         <div>
           <p className="label text-xs text-primary">The case collection</p>
           <h1 className="mt-4 text-5xl text-foreground md:text-7xl">Vantis <span className="text-primary">cases.</span></h1>
@@ -30,7 +30,7 @@ function Shop() {
         <p className="flex shrink-0 items-center gap-2 text-sm text-muted-foreground"><Truck className="h-5 w-5 text-primary" /> Free shipping on orders over $50</p>
       </section>
       <Marquee rotateModels items={["Built better", "MagSafe compatible"]} />
-      <section className="mx-auto max-w-6xl px-6 pt-12">
+      <section className="mx-auto max-w-[88rem] px-6 lg:px-12 pt-12">
         <div className="grid gap-12 md:grid-cols-2 md:gap-10">
           {products.map((p) => (
             <article key={p.slug} className="group min-w-0">
