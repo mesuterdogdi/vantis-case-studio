@@ -57,7 +57,6 @@ function ProductPage() {
         <div className="glow-blob animate-glow pointer-events-none absolute left-0 top-20 h-96 w-96" />
         <div className="relative md:sticky md:top-28 md:self-start">
           <img src={p.image} alt={`Vantis ${p.name} in Black`} className="animate-rise w-full rounded-[2.5rem]" />
-          {color === "Blue" && <p className="mt-4 text-center text-xs text-muted-foreground">Blue selected. Product photo shows Black; Blue photos coming soon.</p>}
         </div>
         <div className="animate-rise relative">
           <Link to="/shop" className="label text-[0.65rem] text-muted-foreground hover:text-primary">← All cases</Link>
