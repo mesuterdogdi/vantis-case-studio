@@ -36,15 +36,15 @@ function Shop() {
             <article key={p.slug} className="group min-w-0">
               <Link to="/shop/$slug" params={{ slug: p.slug }} aria-label={`Explore Vantis ${p.name}`} className="relative block overflow-hidden rounded-lg bg-card">
                 <img src={p.image} alt={`Vantis ${p.name} in Black`} className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.05] motion-reduce:transform-none" />
-                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background via-background/80 to-background/10 p-6 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-within:opacity-100">
-                  <p className="label text-[0.65rem] text-primary">Features</p>
-                  <ul className="mt-4 space-y-3">
+                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background via-background/80 to-background/10 p-6 md:p-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-within:opacity-100">
+                  <p className="label text-xs text-primary md:text-sm">Features</p>
+                  <ul className="mt-5 origin-bottom-left scale-95 space-y-4 transition-transform duration-500 group-hover:scale-100">
                     {p.features.map(([t, d], i) => (
                       <li key={t} style={{ transitionDelay: `${i * 70}ms` }} className="flex translate-y-3 gap-3 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"><Check className="h-3.5 w-3.5" /></span>
+                        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"><Check className="h-4 w-4" /></span>
                         <div>
-                          <p className="label text-xs text-foreground">{t}</p>
-                          <p className="text-xs text-muted-foreground">{d}</p>
+                          <p className="label text-sm text-foreground md:text-base">{t}</p>
+                          <p className="mt-1 text-sm text-muted-foreground md:text-base">{d}</p>
                         </div>
                       </li>
                     ))}
