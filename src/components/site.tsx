@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart";
+import { Button } from "@/components/ui/button";
 import logo from "@/assets/vantislogotype.png.asset.json";
 import mark from "@/assets/vantisV.png.asset.json";
 import titan from "@/assets/titanhero2good.png.asset.json";
@@ -57,7 +58,7 @@ export function Marquee({ items, rotateModels = false }: { items: string[]; rota
   const content = rotateModels ? ["Free shipping over $50", featuredModel, ...items] : items;
   const row = [...content, ...content, ...content, ...content];
   return (
-    <div className="overflow-hidden bg-primary py-3 text-primary-foreground">
+    <div className="site-marquee overflow-hidden bg-primary py-3 text-primary-foreground">
       <div className="animate-marquee flex w-max gap-10 whitespace-nowrap" onAnimationIteration={() => { if (rotateModels) setFeaturedModel((current) => nextBannerModel(current)); }}>
         {[...row, ...row].map((t, i) => (
           <span key={i} className="label flex items-center gap-10 text-xs">
@@ -83,7 +84,7 @@ function CartLink() {
 export function Header() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 px-4 pt-4">
+    <header className="site-header sticky top-0 z-50 px-4 pt-4">
       <div className="glass mx-auto flex max-w-[96rem] items-center justify-between rounded-full px-6 py-3">
         <Link to="/" aria-label="Vantis home">
           <img src={logo.url} alt="Vantis" className="h-5 w-auto" />
@@ -104,13 +105,13 @@ export function Header() {
         <div className="flex items-center gap-3">
           <CartLink />
           <Link to="/shop" className="btn-neon hidden !px-5 !py-2.5 md:inline-flex">Shop now</Link>
-          <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu" aria-expanded={open} aria-controls="mobile-navigation">
             {open ? <X /> : <Menu />}
-          </button>
+          </Button>
         </div>
       </div>
       {open && (
-        <nav className="glass mx-auto mt-2 flex max-w-[96rem] flex-col rounded-3xl p-4 md:hidden">
+        <nav id="mobile-navigation" className="mobile-navigation glass mx-auto mt-2 flex max-w-[96rem] flex-col rounded-3xl p-4 md:hidden">
           {nav.map((n) => (
             <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="label rounded-2xl px-4 py-3 text-xs">
               {n.label}
@@ -155,6 +156,7 @@ export function ProductCard({ p }: { p: Product }) {
     <Link
       to="/shop/$slug"
       params={{ slug: p.slug }}
+      data-motion-tilt
       className="group relative block overflow-hidden rounded-[2rem] bg-card transition-all duration-500 hover:-translate-y-2 hover:shadow-[var(--shadow-glow)]"
     >
       <img
