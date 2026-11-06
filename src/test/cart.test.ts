@@ -4,7 +4,7 @@ const l = { slug: "titan", model: "iPhone 18 Pro Max", color: "Black" };
 describe("cart", () => {
   it("merges same model/color and caps at stock", () => {
     const a = addLine([], { ...l, qty: 8 }, 12);
-    expect(addLine(a, { ...l, qty: 8 }, 12)[0].qty).toBe(12);
+    expect(addLine(a, { ...l, qty: 8 }, 12)[0]?.qty).toBe(12);
   });
   it("keeps different colors as separate lines", () => {
     const a = addLine([], { ...l, qty: 1 }, 12);
