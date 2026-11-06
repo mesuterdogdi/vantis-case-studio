@@ -58,7 +58,7 @@ function ProductPage() {
       <Header />
       <section className="relative mx-auto grid max-w-[96rem] gap-12 px-6 py-16 md:grid-cols-2">
         <div className="glow-blob animate-glow pointer-events-none absolute left-0 top-20 h-96 w-96" />
-        <div className="relative md:sticky md:top-28 md:self-start">
+        <div data-motion-tilt className="product-artwork relative md:sticky md:top-28 md:self-start">
           <img src={p.image} alt={`Vantis ${p.name} in Black`} className="animate-rise w-full rounded-[2.5rem]" />
         </div>
         <div className="animate-rise relative">
