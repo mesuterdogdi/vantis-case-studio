@@ -151,6 +151,10 @@
 @utility glass { background: color-mix(in oklab, var(--card) 70%, transparent); backdrop-filter: blur(16px); border: 1px solid color-mix(in oklab, var(--foreground) 8%, transparent); }
 @utility text-outline { color: transparent; -webkit-text-stroke: 1px color-mix(in oklab, var(--foreground) 35%, transparent); }
 
+.home-artwork-fade {
+  background: linear-gradient(to bottom, var(--background), transparent 12rem);
+}
+
 /* Motion changes only presentation; existing artwork and layout stay intact. */
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
