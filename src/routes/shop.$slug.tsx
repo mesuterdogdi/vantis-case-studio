@@ -4,6 +4,7 @@ import { Check, Minus, Plus, Truck, ShieldCheck, RotateCcw } from "lucide-react"
 import { Header, Footer, ProductCard, products, models, colors, formatPrice, freeShippingNote } from "@/components/site";
 import { Button } from "@/components/ui/button";
 import { stockFor, isLowStock } from "@/lib/catalog";
+import { cart, useCart, sameLine } from "@/lib/cart";
 
 export const Route = createFileRoute("/shop/$slug")({
   loader: ({ params }) => {
@@ -48,7 +49,9 @@ function ProductPage() {
   if (!p) return null;
   const stock = stockFor(p.slug, model, color);
   const low = isLowStock(stock);
-  const q = Math.min(qty, stock);
+  const inCart = useCart().find((i) => sameLine(i, { slug: p.slug, model, color }))?.qty ?? 0;
+  const avail = Math.max(0, stock - inCart);
+  const q = Math.max(avail ? 1 : 0, Math.min(qty, avail));
 
   return (
     <div className="min-h-screen overflow-x-hidden">
@@ -69,7 +72,7 @@ function ProductPage() {
             <p className="label text-[0.65rem] text-muted-foreground">Model</p>
             <div className="mt-3 flex flex-wrap gap-3">
               {models.map((m) => (
-                <Button variant="outline" aria-pressed={model === m} key={m} onClick={() => setModel(m)} className={`h-auto rounded-full border px-5 py-3 text-sm transition-colors ${model === m ? "border-primary text-primary" : "border-border text-muted-foreground"}`}>
+                <Button variant="outline" aria-pressed={model === m} key={m} onClick={() => { setModel(m); setQty(1); }} className={`h-auto rounded-full border px-5 py-3 text-sm transition-colors ${model === m ? "border-primary text-primary" : "border-border text-muted-foreground"}`}>
                   {m}
                 </Button>
               ))}
@@ -80,7 +83,7 @@ function ProductPage() {
             <p className="label text-[0.65rem] text-muted-foreground">Color — <span className="text-foreground">{color}</span></p>
             <div className="mt-3 flex gap-3">
               {colors.map((c) => (
-                <Button variant="outline" aria-pressed={color === c.name} key={c.name} onClick={() => setColor(c.name)} aria-label={c.name} className={`h-11 w-11 rounded-full border-2 p-1 ${color === c.name ? "border-primary" : "border-border"}`}>
+                <Button variant="outline" aria-pressed={color === c.name} key={c.name} onClick={() => { setColor(c.name); setQty(1); }} aria-label={c.name} className={`h-11 w-11 rounded-full border-2 p-1 ${color === c.name ? "border-primary" : "border-border"}`}>
                   <span className={`block h-full w-full rounded-full ${c.swatch} ring-1 ring-border`} />
                 </Button>
               ))}
@@ -91,15 +94,16 @@ function ProductPage() {
             <div className="flex items-center gap-4 rounded-full bg-secondary px-4 py-3">
               <button onClick={() => setQty(Math.max(1, q - 1))} aria-label="Less"><Minus className="h-4 w-4" /></button>
               <span className="w-6 text-center">{q}</span>
-              <button onClick={() => setQty(Math.min(stock, q + 1))} disabled={q >= stock} className="disabled:opacity-40" aria-label="More"><Plus className="h-4 w-4" /></button>
+              <button onClick={() => setQty(Math.min(avail, q + 1))} disabled={q >= avail} className="disabled:opacity-40" aria-label="More"><Plus className="h-4 w-4" /></button>
             </div>
-            <button onClick={() => { setAdded(true); setTimeout(() => setAdded(false), 2000); }} className="btn-neon flex-1 justify-center">
-              {added ? <><Check className="h-4 w-4" /> Added</> : "Add to cart"}
+            <button disabled={!avail} onClick={() => { cart.add({ slug: p.slug, model, color, qty: q }, stock); setQty(1); setAdded(true); setTimeout(() => setAdded(false), 2000); }} className="btn-neon flex-1 justify-center disabled:opacity-50">
+              {added ? <><Check className="h-4 w-4" /> Added</> : avail ? "Add to cart" : "All in your cart"}
             </button>
           </div>
 
           <p className="mt-4 flex items-center gap-3 text-sm text-muted-foreground">
             <span>{stock} in stock</span>
+            {inCart > 0 && <Link to="/cart" className="text-primary hover:underline">{inCart} in your cart</Link>}
             {low && <span className="label rounded-full bg-primary/15 px-3 py-1 text-[0.6rem] text-primary">Only {stock} left</span>}
           </p>
 

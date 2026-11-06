@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
+import { useCart } from "@/lib/cart";
 import logo from "@/assets/vantislogotype.png.asset.json";
 import mark from "@/assets/vantisV.png.asset.json";
 import titan from "@/assets/titanhero2good.png.asset.json";
@@ -69,6 +70,16 @@ export function Marquee({ items, rotateModels = false }: { items: string[]; rota
   );
 }
 
+function CartLink() {
+  const count = useCart().reduce((s, i) => s + i.qty, 0);
+  return (
+    <Link to="/cart" aria-label={`Cart, ${count} items`} className="relative rounded-full p-2 text-foreground hover:text-primary">
+      <ShoppingBag className="h-5 w-5" />
+      {count > 0 && <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[0.65rem] font-bold text-primary-foreground">{count}</span>}
+    </Link>
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
   return (
@@ -90,10 +101,13 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <Link to="/shop" className="btn-neon hidden !px-5 !py-2.5 md:inline-flex">Shop now</Link>
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
-          {open ? <X /> : <Menu />}
-        </button>
+        <div className="flex items-center gap-3">
+          <CartLink />
+          <Link to="/shop" className="btn-neon hidden !px-5 !py-2.5 md:inline-flex">Shop now</Link>
+          <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
+            {open ? <X /> : <Menu />}
+          </button>
+        </div>
       </div>
       {open && (
         <nav className="glass mx-auto mt-2 flex max-w-[96rem] flex-col rounded-3xl p-4 md:hidden">
