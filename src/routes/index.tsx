@@ -37,7 +37,8 @@ function Index() {
           className="absolute inset-0 -z-10 h-full w-full object-cover object-right"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/85 to-background/10" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-transparent to-background/70" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-transparent to-transparent" />
+        <div className="home-artwork-fade pointer-events-none absolute inset-0 -z-10" />
         <div className="glow-blob animate-glow pointer-events-none absolute -left-24 top-1/3 h-[26rem] w-[26rem]" />
         <div className="relative mx-auto w-full max-w-[96rem] px-6 lg:px-12 py-24">
           <div className="animate-rise max-w-2xl">
