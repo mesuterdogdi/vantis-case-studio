@@ -13,3 +13,4 @@
 - Use the shop marquee's animation iteration event to choose a different random supported model after each full loop; preserve a deterministic initial model for hydration.
 - Keep site-wide motion in the browser-only SiteMotion enhancement and semantic stylesheet rules; respect reduced motion and leave existing artwork and controls usable without animation.
 - Keep original product photos accurate: label them as Black and disclose that Blue photos are not available instead of recoloring supplied assets.
+- Keep product-detail photography in ProductGallery, separate from storefront artwork, so studio views can be browsed and enlarged without replacing shared promotional images.
