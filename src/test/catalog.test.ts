@@ -30,7 +30,7 @@ describe("Vantis prices and shipping", () => {
   });
   it("shows prices with two decimals", () => {
     expect(formatPrice(24.99)).toBe("$24.99");
-    expect(formatPrice(16.99 * 3)).toBe("$49.97");
+    expect(formatPrice(16.99 * 3)).toBe("$50.97");
   });
   it("offers free shipping only once the order passes $49", () => {
     expect(freeShippingNote(24.99 * 2)).toBe("Free shipping included.");
