@@ -55,7 +55,7 @@ const nav = [
 
 export function Marquee({ items, rotateModels = false }: { items: string[]; rotateModels?: boolean }) {
   const [featuredModel, setFeaturedModel] = useState<string>(models[0]);
-  const content = rotateModels ? ["Free shipping over $50", featuredModel, ...items] : items;
+  const content = rotateModels ? ["Free shipping over $49", featuredModel, ...items] : items;
   const row = [...content, ...content, ...content, ...content];
   return (
     <div className="site-marquee overflow-hidden bg-primary py-3 text-primary-foreground">
