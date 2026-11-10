@@ -33,10 +33,11 @@ describe("Vantis prices and shipping", () => {
     expect(formatPrice(16.99 * 3)).toBe("$49.97");
   });
   it("offers free shipping only once the order passes $49", () => {
-    expect(FREE_SHIPPING_THRESHOLD).toBe(50);
+    expect(freeShippingNote(24.99 * 2)).toBe("Free shipping included.");
+    expect(FREE_SHIPPING_THRESHOLD).toBe(49);
     expect(products.every((p) => p.price < FREE_SHIPPING_THRESHOLD)).toBe(true);
     expect(products[0].price * 2 + products[1].price).toBeGreaterThan(FREE_SHIPPING_THRESHOLD);
-    expect(freeShippingNote(16.99)).toBe("Add $33.01 more for free shipping.");
+    expect(freeShippingNote(16.99)).toBe("Add $32.01 more for free shipping.");
     expect(freeShippingNote(50.97)).toBe("Free shipping included.");
   });
 });
