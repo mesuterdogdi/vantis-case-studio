@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Check, Minus, Plus, Truck, ShieldCheck, RotateCcw } from "lucide-react";
 import { Header, Footer, ProductCard, products, models, colors, formatPrice, freeShippingNote } from "@/components/site";
 import { Button } from "@/components/ui/button";
+import { ProductGallery } from "@/components/product-gallery";
 import { stockFor, isLowStock } from "@/lib/catalog";
 import { cart, useCart, sameLine } from "@/lib/cart";
 
@@ -58,9 +59,7 @@ function ProductPage() {
       <Header />
       <section className="relative mx-auto grid max-w-[96rem] gap-12 px-6 py-16 md:grid-cols-2">
         <div className="glow-blob animate-glow pointer-events-none absolute left-0 top-20 h-96 w-96" />
-        <div data-motion-tilt className="product-artwork relative md:sticky md:top-28 md:self-start">
-          <img src={p.image} alt={`Vantis ${p.name} in Black`} className="animate-rise w-full rounded-[2.5rem]" />
-        </div>
+        <ProductGallery key={p.slug} name={p.name} image={p.image} color={color} />
         <div className="animate-rise relative">
           <Link to="/shop" className="label text-[0.65rem] text-muted-foreground hover:text-primary">← All cases</Link>
           <h1 className="mt-4 text-6xl text-foreground md:text-7xl">Vantis <span className="text-primary">{p.name}</span></h1>

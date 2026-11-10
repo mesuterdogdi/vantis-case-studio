@@ -1,4 +1,5 @@
 # Tasks
+- [x] Create reference-based Titan studio photos and add a browsable, expandable product gallery; verify desktop and mobile.
 - [x] Add subtle site-wide motion and interactive feedback without changing existing artwork; verify desktop, mobile, and reduced-motion behavior.
 - [x] Correct detachable lens guard claims: Titan only, never Ghost; verify product details and explain contact delivery setup.
 - [x] Make Contact fuller with topic-specific fields, quick answers, and a welcoming thank-you state; verify the form.
