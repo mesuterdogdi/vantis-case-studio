@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Minus, Plus, Trash2, Truck, Lock } from "lucide-react";
 import { Header, Footer, products, formatPrice, freeShippingNote } from "@/components/site";
-import { stockFor } from "@/lib/catalog";
+import { stockFor, FREE_SHIPPING_THRESHOLD } from "@/lib/catalog";
 import { cart, useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/cart")({
@@ -69,7 +69,7 @@ function CartPage() {
               <dl className="mt-6 space-y-3 text-sm">
                 <div className="flex justify-between"><dt className="text-muted-foreground">Items</dt><dd>{count}</dd></div>
                 <div className="flex justify-between"><dt className="text-muted-foreground">Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div>
-                <div className="flex justify-between"><dt className="text-muted-foreground">Shipping</dt><dd>{subtotal >= 50 ? "Free" : "Calculated at checkout"}</dd></div>
+                <div className="flex justify-between"><dt className="text-muted-foreground">Shipping</dt><dd>{subtotal >= FREE_SHIPPING_THRESHOLD ? "Free" : "Calculated at checkout"}</dd></div>
               </dl>
               <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground"><Truck className="h-4 w-4 shrink-0 text-primary" /> {freeShippingNote(subtotal)}</p>
               <div className="mt-6 flex justify-between border-t border-border pt-6"><span className="label">Total</span><span className="label text-2xl text-primary">{formatPrice(subtotal)}</span></div>

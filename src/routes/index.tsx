@@ -56,7 +56,7 @@ function Index() {
               <Link to="/about" className="btn-ghost-neon">Our story</Link>
             </div>
             <dl className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8">
-              {[["2", "Cases"], ["4", "iPhone models"], ["$49+", "Free shipping"]].map(([v, l]) => (
+              {[["2", "Cases"], ["4", "iPhone models"], ["$40+", "Free shipping"]].map(([v, l]) => (
                 <div key={l}><dt className="label text-[0.65rem] text-muted-foreground">{l}</dt><dd className="mt-2 font-display text-3xl italic text-primary">{v}</dd></div>
               ))}
             </dl>
@@ -64,7 +64,7 @@ function Index() {
         </div>
       </section>
 
-      <Marquee items={["Military grade protection", "MagSafe compatible", "Drop-tested 15ft", "Free shipping over $49", "Built better"]} />
+      <Marquee items={["Military grade protection", "MagSafe compatible", "Drop-tested 15ft", "Free shipping over $40", "Built better"]} />
 
       <section className="mx-auto grid max-w-[96rem] gap-6 px-6 py-24 md:grid-cols-3">
         {pillars.map(({ icon: Icon, title, text }, i) => (

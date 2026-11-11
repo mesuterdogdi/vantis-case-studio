@@ -5,7 +5,7 @@ export const colors = [
   { name: "Blue", swatch: "bg-case-blue" },
 ] as const;
 
-export const FREE_SHIPPING_THRESHOLD = 49;
+export const FREE_SHIPPING_THRESHOLD = 40;
 
 export function formatPrice(value: number): string {
   return `$${value.toFixed(2)}`;
