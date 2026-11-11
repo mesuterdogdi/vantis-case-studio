@@ -6,6 +6,8 @@ import rear from "@/assets/titan-studio-rear.jpg";
 import angle from "@/assets/titan-studio-angle.jpg";
 import interior from "@/assets/titan-studio-interior.jpg";
 import side from "@/assets/titan-studio-side.jpg";
+import bottom from "@/assets/titan-studio-bottom.jpg";
+import ghostAngle from "@/assets/ghost-studio-angle.jpg";
 import ghostRear from "@/assets/ghost-studio-rear.jpg";
 import ghostInterior from "@/assets/ghost-studio-interior.jpg";
 import ghostSide from "@/assets/ghost-studio-side.jpg";
@@ -16,13 +18,15 @@ const titanPhotos = [
   { src: angle, label: "Three-quarter view" },
   { src: interior, label: "Interior view" },
   { src: side, label: "Side profile" },
+  { src: bottom, label: "Edge detail" },
 ];
 
 const ghostPhotos = [
   { src: ghostRear, label: "Rear view" },
+  { src: ghostAngle, label: "Three-quarter view" },
   { src: ghostInterior, label: "Interior view" },
   { src: ghostSide, label: "Side profile" },
-  { src: ghostBottom, label: "Bottom ports" },
+  { src: ghostBottom, label: "Edge detail" },
 ];
 
 export function ProductGallery({ name, image, color }: { name: string; image: string; color: string }) {
@@ -71,7 +75,7 @@ export function ProductGallery({ name, image, color }: { name: string; image: st
         </DialogContent>
       </Dialog>
       {photos.length > 1 && (
-        <div className="mt-4 grid grid-cols-4 gap-3" aria-label={`${name} photo views`}>
+        <div className="mt-4 grid grid-cols-5 gap-3" aria-label={`${name} photo views`}>
           {photos.map((item, i) => (
             <Button key={item.src} variant="outline" aria-label={`Show ${item.label.toLowerCase()}`} title={item.label} aria-pressed={index === i} onClick={() => setIndex(i)} className={`aspect-square h-auto w-full overflow-hidden rounded-lg p-0 ${index === i ? "border-primary ring-2 ring-primary" : "border-border"}`}>
               <img src={item.src} alt="" className="h-full w-full object-contain" loading="lazy" />
