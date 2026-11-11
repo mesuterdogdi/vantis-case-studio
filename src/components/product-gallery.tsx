@@ -6,6 +6,10 @@ import rear from "@/assets/titan-studio-rear.jpg";
 import angle from "@/assets/titan-studio-angle.jpg";
 import interior from "@/assets/titan-studio-interior.jpg";
 import side from "@/assets/titan-studio-side.jpg";
+import ghostRear from "@/assets/ghost-studio-rear.jpg";
+import ghostInterior from "@/assets/ghost-studio-interior.jpg";
+import ghostSide from "@/assets/ghost-studio-side.jpg";
+import ghostBottom from "@/assets/ghost-studio-bottom.jpg";
 
 const titanPhotos = [
   { src: rear, label: "Rear view" },
@@ -14,10 +18,17 @@ const titanPhotos = [
   { src: side, label: "Side profile" },
 ];
 
+const ghostPhotos = [
+  { src: ghostRear, label: "Rear view" },
+  { src: ghostInterior, label: "Interior view" },
+  { src: ghostSide, label: "Side profile" },
+  { src: ghostBottom, label: "Bottom ports" },
+];
+
 export function ProductGallery({ name, image, color }: { name: string; image: string; color: string }) {
   const [index, setIndex] = useState(0);
   const [zoomed, setZoomed] = useState(false);
-  const photos = name === "Titan" ? titanPhotos : [{ src: image, label: "Product view" }];
+  const photos = name === "Titan" ? titanPhotos : name === "Ghost" ? ghostPhotos : [{ src: image, label: "Product view" }];
   const photo = photos[index] ?? photos[0];
   if (!photo) return null;
   const step = (direction: number) => {
