@@ -3,10 +3,14 @@ import { useState } from "react";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/vantislogotype.png.asset.json";
-import mark from "@/assets/vantisV.png.asset.json";
-import titan from "@/assets/titanhero2good.png.asset.json";
-import ghost from "@/assets/ghosthero1.png.asset.json";
+import logoSrc from "@/assets/vantislogotype.png";
+const logo = { url: logoSrc };
+import markSrc from "@/assets/vantisV.png";
+const mark = { url: markSrc };
+import titanSrc from "@/assets/titanhero2good.png";
+const titan = { url: titanSrc };
+import ghostSrc from "@/assets/ghosthero1.png";
+const ghost = { url: ghostSrc };
 import { formatPrice, models, nextBannerModel } from "@/lib/catalog";
 export { colors, formatPrice, FREE_SHIPPING_THRESHOLD, freeShippingNote, models } from "@/lib/catalog";
 
