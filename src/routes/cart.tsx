@@ -3,6 +3,9 @@ import { Minus, Plus, Trash2, Truck, Lock } from "lucide-react";
 import { Header, Footer, products, formatPrice, freeShippingNote } from "@/components/site";
 import { stockFor, FREE_SHIPPING_THRESHOLD } from "@/lib/catalog";
 import { cart, useCart } from "@/lib/cart";
+import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { createCheckout } from "@/lib/checkout.functions";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
@@ -23,6 +26,18 @@ function CartPage() {
   const lines = items.map((i) => ({ ...i, p: products.find((p) => p.slug === i.slug)! })).filter((l) => l.p);
   const subtotal = lines.reduce((s, l) => s + l.p.price * l.qty, 0);
   const count = lines.reduce((s, l) => s + l.qty, 0);
+  const checkoutFn = useServerFn(createCheckout);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const checkout = async () => {
+    setBusy(true); setError("");
+    try {
+      const res = await checkoutFn({ data: { items: lines.map(({ slug, model, color, qty }) => ({ slug: slug as "titan" | "ghost", model: model as never, color: color as "Black" | "Blue", qty })) } });
+      if ("url" in res && res.url) { window.location.href = res.url; return; }
+      setError(("error" in res && res.error) || "Couldn't start checkout.");
+    } catch { setError("Couldn't start checkout. Please try again."); }
+    setBusy(false);
+  };
 
   return (
     <div className="min-h-screen overflow-x-hidden">
@@ -69,12 +84,13 @@ function CartPage() {
               <dl className="mt-6 space-y-3 text-sm">
                 <div className="flex justify-between"><dt className="text-muted-foreground">Items</dt><dd>{count}</dd></div>
                 <div className="flex justify-between"><dt className="text-muted-foreground">Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div>
-                <div className="flex justify-between"><dt className="text-muted-foreground">Shipping</dt><dd>{subtotal >= FREE_SHIPPING_THRESHOLD ? "Free" : "Calculated at checkout"}</dd></div>
+                <div className="flex justify-between"><dt className="text-muted-foreground">Shipping</dt><dd>{subtotal >= FREE_SHIPPING_THRESHOLD ? "Free" : "$4.99"}</dd></div>
               </dl>
               <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground"><Truck className="h-4 w-4 shrink-0 text-primary" /> {freeShippingNote(subtotal)}</p>
-              <div className="mt-6 flex justify-between border-t border-border pt-6"><span className="label">Total</span><span className="label text-2xl text-primary">{formatPrice(subtotal)}</span></div>
-              <button disabled className="btn-neon mt-6 w-full justify-center opacity-60"><Lock className="h-4 w-4" /> Checkout coming soon</button>
-              <p className="mt-3 text-center text-xs text-muted-foreground">Secure payments are being set up. Your cart is saved on this device.</p>
+              <div className="mt-6 flex justify-between border-t border-border pt-6"><span className="label">Total</span><span className="label text-2xl text-primary">{formatPrice(subtotal + (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 4.99))}</span></div>
+              <button onClick={checkout} disabled={busy} className="btn-neon mt-6 w-full justify-center disabled:opacity-60"><Lock className="h-4 w-4" /> {busy ? "Opening secure checkout…" : "Checkout"}</button>
+              {error && <p role="alert" className="mt-3 text-center text-sm text-destructive">{error}</p>}
+              <p className="mt-3 text-center text-xs text-muted-foreground">Secure payment by Stripe. Card, Apple Pay and Google Pay accepted.</p>
             </aside>
           </div>
         )}

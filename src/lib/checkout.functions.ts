@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestHeader } from "@tanstack/react-start/server";
 import { z } from "zod";
-import { colors, models, stockFor, FREE_SHIPPING_THRESHOLD } from "@/lib/catalog";
+import { models, stockFor, FREE_SHIPPING_THRESHOLD } from "@/lib/catalog";
 
 const PRICES = {
   titan: { priceId: "price_1UamOM387l6jwqk6v2tbAtyc", cents: 2499, name: "Titan" },
@@ -12,8 +12,8 @@ const SHIPPING_FEE_CENTS = 499;
 const schema = z.object({
   items: z.array(z.object({
     slug: z.enum(["titan", "ghost"]),
-    model: z.enum(models as unknown as [string, ...string[]]),
-    color: z.enum(colors.map((c) => (typeof c === "string" ? c : c.name)) as [string, ...string[]]),
+    model: z.enum(models),
+    color: z.enum(["Black", "Blue"]),
     qty: z.number().int().min(1).max(50),
   })).min(1).max(20),
 });
