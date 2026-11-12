@@ -34,7 +34,7 @@ export const products = [
   {
     slug: "ghost",
     name: "Ghost",
-    price: 16.99,
+    price: 15.99,
     hasDetachableLensGuard: false,
     image: ghost.url,
     tagline: "Slim hybrid. Serious protection.",

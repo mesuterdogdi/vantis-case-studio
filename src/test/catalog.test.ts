@@ -25,22 +25,22 @@ describe("Vantis product options", () => {
 });
 
 describe("Vantis prices and shipping", () => {
-  it("prices Titan at $24.99 and Ghost at $16.99", () => {
-    expect(products.map((p) => [p.slug, p.price])).toEqual([["titan", 24.99], ["ghost", 16.99]]);
+  it("prices Titan at $24.99 and Ghost at $15.99", () => {
+    expect(products.map((p) => [p.slug, p.price])).toEqual([["titan", 24.99], ["ghost", 15.99]]);
   });
   it("shows prices with two decimals", () => {
     expect(formatPrice(24.99)).toBe("$24.99");
-    expect(formatPrice(16.99 * 3)).toBe("$50.97");
+    expect(formatPrice(15.99 * 3)).toBe("$47.97");
   });
   it("offers free shipping only once the order passes $40", () => {
-    expect(freeShippingNote(24.99 + 16.99)).toBe("Free shipping included.");
-    expect(freeShippingNote(16.99 * 2)).toBe("Add $6.02 more for free shipping.");
+    expect(freeShippingNote(24.99 + 15.99)).toBe("Free shipping included.");
+    expect(freeShippingNote(15.99 * 2)).toBe("Add $8.02 more for free shipping.");
     expect(freeShippingNote(24.99 * 2)).toBe("Free shipping included.");
     expect(FREE_SHIPPING_THRESHOLD).toBe(40);
     expect(products.every((p) => p.price < FREE_SHIPPING_THRESHOLD)).toBe(true);
     expect(products[0].price + products[1].price).toBeGreaterThan(FREE_SHIPPING_THRESHOLD);
-    expect(freeShippingNote(16.99)).toBe("Add $23.01 more for free shipping.");
-    expect(freeShippingNote(50.97)).toBe("Free shipping included.");
+    expect(freeShippingNote(15.99)).toBe("Add $24.01 more for free shipping.");
+    expect(freeShippingNote(47.97)).toBe("Free shipping included.");
   });
 });
 import { stockFor, isLowStock } from "@/lib/catalog";
