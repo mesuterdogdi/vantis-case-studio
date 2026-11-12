@@ -7,9 +7,9 @@ export const Route = createFileRoute("/shop/")({
   head: () => ({
     meta: [
       { title: "Shop Cases — Vantis" },
-      { name: "description", content: "Shop Vantis Titan and Ghost cases for iPhone 18 Pro and Pro Max, and iPhone 17 Pro and Pro Max, in Black or Blue. Titan $24.99, Ghost $16.99. Free shipping on orders over $40." },
+      { name: "description", content: "Shop Vantis Titan and Ghost cases for iPhone 18 Pro and Pro Max, and iPhone 17 Pro and Pro Max, in Black or Blue. Titan $24.99, Ghost $15.99. Free shipping on orders over $40." },
       { property: "og:title", content: "Shop Cases — Vantis" },
-      { property: "og:description", content: "Explore Titan ($24.99) and Ghost ($16.99) for iPhone 18 and 17 Pro models in Black or Blue. Free shipping on orders over $40." },
+      { property: "og:description", content: "Explore Titan ($24.99) and Ghost ($15.99) for iPhone 18 and 17 Pro models in Black or Blue. Free shipping on orders over $40." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
