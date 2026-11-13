@@ -1,5 +1,4 @@
 # Tasks
-- [x] Enhance site movement without changing content; verify browsing, photo controls, mobile, and reduced motion.
 - [x] Set Ghost to $15.99 in the storefront and cart.
 - [ ] Set Ghost’s Stripe checkout price to $15.99; blocked by the saved Stripe key being rejected (HTTP 401), needs a new $15.99 Stripe Price ID.
 - [x] Create reference-based Titan studio photos and add a browsable, expandable product gallery; verify desktop and mobile.
