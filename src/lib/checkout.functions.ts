@@ -5,7 +5,7 @@ import { models, stockFor, FREE_SHIPPING_THRESHOLD } from "@/lib/catalog";
 
 const PRICES = {
   titan: { priceId: "price_1UamOM387l6jwqk6v2tbAtyc", cents: 2499, name: "Titan" },
-  ghost: { priceId: "price_1UamOj387l6jwqk6PVvebLxx", cents: 1699, name: "Ghost" },
+  ghost: { priceId: "price_1Uamfd387l6jwqk6vc6cM4mU", cents: 1599, name: "Ghost" },
 } as const;
 const SHIPPING_FEE_CENTS = 499;
 
