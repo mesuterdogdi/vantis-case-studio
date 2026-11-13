@@ -28,21 +28,8 @@ export function SiteMotion() {
         observer.observe(section);
       });
 
-      const backdrop = document.querySelector<HTMLElement>("[data-motion-background]");
-      let scrollFrame = 0;
-      const updateScroll = () => {
-        document.documentElement.classList.toggle("site-scrolled", window.scrollY > 32);
-        if (backdrop) {
-          const section = backdrop.parentElement;
-          const bounds = section?.getBoundingClientRect();
-          if (bounds && bounds.bottom > 0) {
-            backdrop.style.setProperty("--artwork-drift", `${Math.min(28, Math.max(0, -bounds.top) * 0.06)}px`);
-          }
-        }
-      };
       const onScroll = () => {
-        cancelAnimationFrame(scrollFrame);
-        scrollFrame = requestAnimationFrame(updateScroll);
+        document.documentElement.classList.toggle("site-scrolled", window.scrollY > 32);
       };
       onScroll();
       window.addEventListener("scroll", onScroll, { passive: true });
@@ -58,8 +45,8 @@ export function SiteMotion() {
             const x = Math.max(-0.5, Math.min(0.5, (event.clientX - bounds.left) / bounds.width - 0.5));
             const y = Math.max(-0.5, Math.min(0.5, (event.clientY - bounds.top) / bounds.height - 0.5));
             frame = requestAnimationFrame(() => {
-              element.style.setProperty("--tilt-x", `${-y * 7}deg`);
-              element.style.setProperty("--tilt-y", `${x * 7}deg`);
+              element.style.setProperty("--tilt-x", `${-y * 4}deg`);
+              element.style.setProperty("--tilt-y", `${x * 4}deg`);
             });
           };
           const reset = () => {
@@ -80,8 +67,6 @@ export function SiteMotion() {
       }
 
       cleanup = () => {
-        cancelAnimationFrame(scrollFrame);
-        backdrop?.style.removeProperty("--artwork-drift");
         observer.disconnect();
         revealTargets.forEach((section) => section.classList.remove("motion-reveal", "motion-visible"));
         window.removeEventListener("scroll", onScroll);

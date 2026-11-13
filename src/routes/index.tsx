@@ -30,7 +30,6 @@ function Index() {
       <section className="relative isolate flex min-h-[86vh] items-center overflow-hidden">
         <img
           src={heroBg}
-          data-motion-background
           alt=""
           aria-hidden="true"
           width={1920}
