@@ -53,7 +53,7 @@ export function ProductGallery({ name, image, color }: { name: string; image: st
         <div className="relative overflow-hidden rounded-lg">
           <DialogTrigger asChild>
             <Button variant="ghost" aria-label={`Expand ${name} photo`} className="block h-auto w-full overflow-hidden rounded-lg p-0 hover:bg-transparent">
-              <img src={photo.src} alt={`Vantis ${name} in Black — ${photo.label}`} className="aspect-square w-full object-contain" />
+              <img key={photo.src} src={photo.src} alt={`Vantis ${name} in Black — ${photo.label}`} className="gallery-photo-enter aspect-square w-full object-contain" />
               <span className="absolute bottom-4 right-4 rounded-full bg-background/90 p-3 text-foreground"><Expand className="h-4 w-4" /></span>
             </Button>
           </DialogTrigger>

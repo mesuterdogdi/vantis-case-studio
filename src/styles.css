@@ -158,6 +158,21 @@
 /* Motion changes only presentation; existing artwork and layout stay intact. */
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
+  [data-motion-background] { transform: translateY(var(--artwork-drift, 0px)) scale(1.06); }
+  .motion-reveal > .grid > *, .motion-reveal.grid > * { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .motion-visible > .grid > *, .motion-visible.grid > * { opacity: 1; transform: none; }
+  .motion-reveal > .grid > :nth-child(2), .motion-reveal.grid > :nth-child(2) { transition-delay: .1s; }
+  .motion-reveal > .grid > :nth-child(3), .motion-reveal.grid > :nth-child(3) { transition-delay: .2s; }
+  .motion-reveal > .grid > :nth-child(4), .motion-reveal.grid > :nth-child(4) { transition-delay: .3s; }
+  .gallery-photo-enter { animation: gallery-arrive .4s cubic-bezier(.2,.7,.2,1) both; }
+  .btn-neon { position: relative; isolation: isolate; overflow: hidden; }
+  .btn-neon::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(110deg, transparent 30%, color-mix(in oklab, var(--foreground) 35%, transparent) 50%, transparent 70%); transform: translateX(-140%); }
+  .btn-neon:hover::after, .btn-neon:focus-visible::after { animation: button-sheen .65s ease; }
+  .site-header nav a { position: relative; }
+  .site-header nav a::after { content: ""; position: absolute; bottom: .25rem; left: 25%; right: 25%; height: 2px; background: var(--primary); transform: scaleX(0); transition: transform .25s ease; }
+  .site-header nav a:hover::after, .site-header nav a:focus-visible::after { transform: scaleX(1); }
+  footer a { transition: color .2s ease, translate .25s ease; }
+  footer a:hover, footer a:focus-visible { translate: 4px 0; }
   .motion-reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
   .motion-reveal.motion-visible { opacity: 1; transform: none; }
   .site-header { transition: padding-top .25s ease; }
@@ -179,7 +194,15 @@
   .product-artwork:hover img { filter: brightness(1.06); }
   button[aria-pressed]:hover { transform: translateY(-2px); }
   .site-header nav a:hover { transform: translateY(-2px); }
+  [data-motion-tilt]:hover, [data-motion-tilt]:focus-visible { box-shadow: var(--shadow-glow); }
+  section.grid > div:hover > div:first-child { transform: rotate(-7deg) scale(1.08); }
+  section.grid > div > div:first-child { transition: transform .3s ease; }
+  .product-artwork button[aria-pressed] img { transition: transform .35s ease; }
+  .product-artwork button[aria-pressed]:hover img { transform: scale(1.1); }
 }
+
+@keyframes gallery-arrive { from { opacity: .45; transform: scale(.98); } to { opacity: 1; transform: scale(1); } }
+@keyframes button-sheen { to { transform: translateX(140%); } }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee, .animate-floaty, .animate-glow, .animate-rise { animation: none; }
