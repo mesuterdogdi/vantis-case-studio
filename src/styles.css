@@ -274,7 +274,7 @@
   }
 
   .site-header a[aria-label="Vantis home"]:hover {
-    transform: rotate(-3deg) scale(1.06);
+    transform: scale(.96);
   }
 
   .site-header a[aria-label^="Cart"]:hover {
@@ -337,4 +337,27 @@
 @media (prefers-reduced-motion: reduce) {
   .motion-feature { translate: none !important; }
   .product-artwork button img { scale: none !important; }
+}
+
+/* Keep the logo press understated and FAQ controls steady. */
+@media (prefers-reduced-motion: no-preference) {
+  .site-header a[aria-label="Vantis home"] {
+    transition: transform .2s ease;
+  }
+
+  .contact-faq button,
+  .contact-faq button:hover:not(:disabled),
+  .contact-faq button:active:not(:disabled) {
+    transform: none;
+    transition: background-color .2s ease, color .2s ease,
+      box-shadow .2s ease, border-color .2s ease;
+  }
+
+  .contact-faq svg {
+    transition: transform .2s ease;
+  }
+
+  .contact-faq a:hover > svg {
+    transform: none;
+  }
 }
