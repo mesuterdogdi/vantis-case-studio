@@ -68,7 +68,7 @@ function Index() {
 
       <section className="mx-auto grid max-w-[96rem] gap-6 px-6 py-24 md:grid-cols-3">
         {pillars.map(({ icon: Icon, title, text }, i) => (
-          <div key={title} className="animate-rise rounded-[2rem] bg-card p-8 transition-colors hover:bg-secondary" style={{ animationDelay: `${i * 120}ms` }}>
+          <div key={title} className="motion-feature animate-rise rounded-[2rem] bg-card p-8 transition-colors hover:bg-secondary" style={{ animationDelay: `${i * 120}ms` }}>
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary">
               <Icon className="h-6 w-6 text-primary-foreground" />
             </div>

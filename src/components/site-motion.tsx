@@ -45,14 +45,18 @@ export function SiteMotion() {
             const x = Math.max(-0.5, Math.min(0.5, (event.clientX - bounds.left) / bounds.width - 0.5));
             const y = Math.max(-0.5, Math.min(0.5, (event.clientY - bounds.top) / bounds.height - 0.5));
             frame = requestAnimationFrame(() => {
-              element.style.setProperty("--tilt-x", `${-y * 4}deg`);
-              element.style.setProperty("--tilt-y", `${x * 4}deg`);
+              element.style.setProperty("--tilt-x", `${-y * 9}deg`);
+              element.style.setProperty("--tilt-y", `${x * 9}deg`);
+              element.style.setProperty("--glow-x", `${(x + 0.5) * 100}%`);
+              element.style.setProperty("--glow-y", `${(y + 0.5) * 100}%`);
             });
           };
           const reset = () => {
             cancelAnimationFrame(frame);
             element.style.removeProperty("--tilt-x");
             element.style.removeProperty("--tilt-y");
+            element.style.removeProperty("--glow-x");
+            element.style.removeProperty("--glow-y");
           };
           element.addEventListener("pointermove", move);
           element.addEventListener("pointerleave", reset);
@@ -77,9 +81,11 @@ export function SiteMotion() {
 
     setup();
     reducedMotion.addEventListener("change", setup);
+    finePointer.addEventListener("change", setup);
     return () => {
       cleanup();
       reducedMotion.removeEventListener("change", setup);
+      finePointer.removeEventListener("change", setup);
     };
   }, [pathname]);
 
